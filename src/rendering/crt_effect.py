@@ -24,20 +24,7 @@ class CRTEffect:
         Args:
             overlay: The overlay surface.
         """
-        self._draw_scanlines(overlay)
         self._add_flickering_effect(overlay)
-
-    def _draw_scanlines(self, overlay):
-        """
-        Draws scanlines on the overlay.
-
-        Args:
-            overlay: The overlay surface.
-        """
-        scanline_color = (0, 0, 0, 50)  # Scanline color with transparency
-        scanline_spacing = 3  # Spacing between scanlines
-        for y in range(0, overlay.get_height(), scanline_spacing):
-            pygame.draw.line(overlay, scanline_color, (0, y), (overlay.get_width(), y))
 
     def _add_flickering_effect(self, overlay):
         """

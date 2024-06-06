@@ -585,19 +585,14 @@ def build_main_directive(
     return formatted_directive
 
 
-def generate_response_helper(
-    character,
-    conversation_history,
-    conversation_analysis,
-    state_tracker,
-    all_characters,
-    event_tracker,
+def build_system_prompt(
+    character, conversation_analysis, state_tracker, event_tracker, conversation_history
 ):
     dynamic_mindset = character.generate_mindset()
     dynamic_mindset += f" Recent conversation analysis: {conversation_analysis}"
 
     # Include the states of all characters
-    for char in all_characters:
+    for char in character.all_characters:
         dynamic_mindset += f" {char.name} state: {json.dumps(state_tracker[char.id])}"
 
     # Include the event history
@@ -621,6 +616,27 @@ def generate_response_helper(
         }
         for msg in conversation_history
     ]
+
+    return dynamic_mindset, formatted_messages
+
+
+def generate_response_helper(
+    character,
+    conversation_history,
+    conversation_analysis,
+    state_tracker,
+    all_characters,
+    event_tracker,
+):
+    character.all_characters = all_characters
+    dynamic_mindset, formatted_messages = build_system_prompt(
+        character,
+        conversation_analysis,
+        state_tracker,
+        event_tracker,
+        conversation_history,
+    )
+
     max_tokens = 200
     temperature = 0
 
