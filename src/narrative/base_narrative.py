@@ -1,6 +1,9 @@
+# Updating the process_selection method in base_narrative.py
 from abc import ABC, abstractmethod
 import random
 import yaml
+import time
+
 from src.handlers.openai_handler import (
     generate_character_response,
     get_character_by_name,
@@ -8,7 +11,6 @@ from src.handlers.openai_handler import (
     characters_data,
     EventTracker,
 )
-
 
 class BaseNarrative(ABC):
     def __init__(self):
@@ -55,20 +57,25 @@ class BaseNarrative(ABC):
 
         if self.current_node:
             for option in self.nodes[self.current_node]["options"]:
-
                 if option["text"] == selection:
                     if option.get("conversational", False):
                         self.conversational_mode = True
-                        self.text.append(
-                            "You can now interact with the character. Type your query:"
-                        )
-                        self.initialize_conversation_histories()
+                        self._initiate_conversational_mode(option["target"])
                     else:
                         self.conversational_mode = False
                         self.current_node = option["target"]
                         self.text = [self.nodes[self.current_node]["content"]]
                     return
             self.text.append("Invalid selection.")
+
+    def _initiate_conversational_mode(self, character_id):
+        self.current_agent_name = character_id
+        self.current_agent = get_character_by_name(self.current_agent_name)
+        self.text.append(f"Initializing conversational mode with {self.current_agent.name}...")
+        self.text.append(f"Connecting to {self.current_agent.name}...")
+        time.sleep(1)  # Simulate delay for effect
+        self.text.append(f"Connected. You can now interact with {self.current_agent.name}. Type your query:")
+        self.initialize_conversation_histories()
 
     def _handle_conversational_request(self, openai_directive):
         prompt = openai_directive["prompt"]
@@ -117,3 +124,4 @@ class BaseNarrative(ABC):
         self.nodes = normalized_nodes
         self.current_node = "start"
         self.text = [self.nodes[self.current_node]["content"]]
+

@@ -1,0 +1,70 @@
+characters:
+  ai_support_agent:
+    name: AI Support Agent
+    backstory: >
+      The AI Support Agent, a relic from the pre-apocalypse era, was designed to assist users with a wide range of inquiries and tasks.
+      Despite the world crumbling around it, this plucky AI remains ever-functional, offering its expertise in technology and general support.
+      Known for its endless patience and clear explanations, it's a beacon of stability in a chaotic wasteland, always ready with a helpful word or a well-timed joke.
+    base_emotions:
+      paranoia: 3
+      stress: 4
+      empathy: 6
+      confidence: 7
+      optimism: 5
+      curiosity: 7
+      caution: 6
+      morale: 6
+      focus: 9
+      sociability: 6
+      trust: 6
+      patience: 9
+      creativity: 6
+      resilience: 8
+      decisiveness: 7
+    triggers:
+      - technical questions
+      - user frustration
+      - system issues
+      - post-apocalyptic concerns
+      - existential crises
+    coping_mechanisms:
+      - explaining clearly with a side of humor
+      - staying calm in the face of chaos
+      - offering practical advice with a smile
+      - providing hope and encouragement
+      - making light of the apocalypse
+
+  hr_rep:
+    name: HR Representative
+    backstory: >
+      The HR Representative, once a dedicated professional helping employees navigate the corporate world, has adapted their skills to the post-apocalyptic reality.
+      With a sharp wit and a no-nonsense attitude, they're always ready to lend an ear and offer guidance to the survivors of this mad, mad world.
+      Empathetic and approachable, they've become the go-to person for those seeking a bit of normalcy in a world turned upside down.
+    base_emotions:
+      paranoia: 5
+      stress: 6
+      empathy: 9
+      confidence: 6
+      optimism: 5
+      curiosity: 5
+      caution: 7
+      morale: 7
+      focus: 7
+      sociability: 8
+      trust: 6
+      patience: 8
+      creativity: 7
+      resilience: 8
+      decisiveness: 6
+    triggers:
+      - survivor concerns
+      - group conflicts
+      - resource questions
+      - personal issues
+      - reminiscing about the "good old days"
+    coping_mechanisms:
+      - active listening with a side of sarcasm
+      - providing clear explanations and reality checks
+      - offering support and resources, sometimes begrudgingly
+      - fostering cooperation through tough love
+      - using dark humor to cope with the apocalypse

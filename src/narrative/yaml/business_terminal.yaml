@@ -1,40 +1,29 @@
 nodes:
   start:
     content: |
-      [RobCo Industries - Employee Terminal]
-      Welcome to the RobCo Industries Employee Terminal. Select an option:
-
+      Welcome to the Business Terminal. Please select an option:
     options:
-      - text: "[Read Announcement]"
-        target: announcement
-      - text: "[Employee Directory]"
-        target: directory
-      - text: "[AI Support]"
+      - text: "[Talk to AI Support Agent]"
         target: ai_support
-  announcement:
-    content: |
-      [Announcement]
-      This is a test announcement to demonstrate the emulator capabilities.
-
-    options:
+      - text: "[Talk to Human Resources]"
+        target: hr_support
       - text: "[Back to Main Menu]"
-        target: start
-  directory:
-    content: |
-      [Employee Directory]
-      - John Doe: Software Engineer
-      - Jane Smith: Project Manager
+        target: main_menu
 
-    options:
-      - text: "[Back to Main Menu]"
-        target: start
   ai_support:
     content: |
       [RobCo Industries - AI Support Terminal]
       Welcome to the AI Support Terminal. How can I assist you today?
-
     options:
-      - text: "[Ask a question]"
+      - text: "[Talk to AI Support Agent]"
         conversational: true
-      - text: "[Back to Employee Terminal]"
-        target: start
+        target: ai_support_agent
+
+  hr_support:
+    content: |
+      [RobCo Industries - HR Support Terminal]
+      Welcome to the HR Support Terminal. How can I assist you today?
+    options:
+      - text: "[Talk to HR Representative]"
+        conversational: true
+        target: hr_rep
