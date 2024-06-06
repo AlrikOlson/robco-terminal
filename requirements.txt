@@ -1,0 +1,4 @@
+pygame==2.5.2
+openai==1.30.5
+anthropic==0.28.0
+fuzzywuzzy==0.18.0

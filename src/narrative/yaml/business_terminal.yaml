@@ -1,0 +1,38 @@
+# business_terminal.yaml (Updated)
+nodes:
+  start:
+    content: |
+      [RobCo Industries - Employee Terminal]
+      Welcome to the RobCo Industries Employee Terminal. Please select a log entry to review.
+
+      Note: Unauthorized access is strictly prohibited.
+    options:
+      - text: "[Project Update]"
+        target: project_update
+      - text: "[Security Incident Report]"
+        target: security_incident
+      - text: "[Employee Records]"
+        target: employee_records
+      - text: "[OpenAI Support]"
+        conversational: true
+  project_update:
+    content: |
+      [Project Update]
+      ...
+    options:
+      - text: "[Back to Main Menu]"
+        target: start
+  security_incident:
+    content: |
+      [Security Incident Report]
+      ...
+    options:
+      - text: "[Back to Main Menu]"
+        target: start
+  employee_records:
+    content: |
+      [Employee Records]
+      ...
+    options:
+      - text: "[Back to Main Menu]"
+        target: start

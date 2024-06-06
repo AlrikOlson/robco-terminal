@@ -1,0 +1,53 @@
+nodes:
+  start:
+    content: |
+      [Dr. Morley's Research Log - Entry 1]
+      Experiment 57-A is yielding promising results. The mutated flora samples are adapting well to the new growth medium. The next phase of the experiment will involve exposing the samples to low levels of radiation to observe any further mutations.
+    options:
+      - text: "[Entry 2]"
+        target: entry_2
+      - text: "[Experiment Protocol]"
+        target: experiment_protocol
+  entry_2:
+    content: |
+      [Dr. Morley's Research Log - Entry 2]
+      Disaster struck today. An unexpected power surge caused a containment breach in Lab 3. The mutated plants have spread beyond our control. We've sealed off the affected areas, but the situation remains precarious.
+    options:
+      - text: "[Entry 3]"
+        target: entry_3
+      - text: "[Back to Entry 1]"
+        target: start
+  entry_3:
+    content: |
+      [Dr. Morley's Research Log - Entry 3]
+      The vault's emergency protocols have been activated. We're attempting to destroy the plants with controlled burns, but progress is slow. Morale among the staff is deteriorating rapidly.
+    options:
+      - text: "[Entry 4]"
+        target: entry_4
+      - text: "[Back to Entry 2]"
+        target: entry_2
+  entry_4:
+    content: |
+      [Dr. Morley's Research Log - Entry 4]
+      This may be my final entry. The plants have overwhelmed our defenses. I've ordered a complete evacuation of all non-essential personnel. If anyone finds this log, remember: curiosity and carelessness have dire consequences.
+    options:
+      - text: "[End of Log]"
+        target: end
+      - text: "[Back to Entry 3]"
+        target: entry_3
+  experiment_protocol:
+    content: |
+      [Experiment 57-A Protocol]
+      - Subject: Mutated flora sample #23
+      - Growth Medium: Enhanced nutrient solution with trace elements
+      - Radiation Exposure: 0.5 rads/hour
+      - Expected Outcome: Increased growth rate and mutation frequency
+    options:
+      - text: "[Back to Entry 1]"
+        target: start
+  end:
+    content: |
+      [End of Log]
+    options:
+      - text: "[Back to Entry 1]"
+        target: start

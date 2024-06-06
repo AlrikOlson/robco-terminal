@@ -1,0 +1,53 @@
+nodes:
+  start:
+    content: |
+      [Overseer's Log - Entry 1]
+      The vault's main doors have been sealed as per Vault-Tec's standard operating procedures. All residents are accounted for, and the initial orientation is underway. Today's priorities include finalizing the resource management plan and conducting a routine inspection of the water purification system.
+    options:
+      - text: "[Entry 2]"
+        target: entry_2
+      - text: "[Resource Management Plan]"
+        target: resource_management
+  entry_2:
+    content: |
+      [Overseer's Log - Entry 2]
+      The first day in the vault has proceeded smoothly. Resident morale appears to be high, and they are adjusting well to their new life underground. We encountered a minor issue with one of the air filtration units, but our engineering team resolved it promptly.
+    options:
+      - text: "[Entry 3]"
+        target: entry_3
+      - text: "[Back to Entry 1]"
+        target: start
+  entry_3:
+    content: |
+      [Overseer's Log - Entry 3]
+      It has come to my attention that some residents are becoming restless. To address this, we've scheduled additional recreational activities to keep everyone occupied. There was a minor disturbance in the cafeteria today, but our security personnel quickly quelled the situation.
+    options:
+      - text: "[Entry 4]"
+        target: entry_4
+      - text: "[Back to Entry 2]"
+        target: entry_2
+  entry_4:
+    content: |
+      [Overseer's Log - Entry 4]
+      Our chief engineer discovered unusual wear on several components of the water purification system. We've initiated a full diagnostic to assess the situation. So far, there are no signs of any major problems, but we'll need to monitor the system closely to ensure optimal performance.
+    options:
+      - text: "[End of Log]"
+        target: end
+      - text: "[Back to Entry 3]"
+        target: entry_3
+  resource_management:
+    content: |
+      [Resource Management Plan]
+      - Food: Adequate supplies for 100 residents for 20 years
+      - Water: Purification system operational, reserve levels sufficient
+      - Energy: Reactor functioning within normal parameters
+      - Medical Supplies: Stocked according to expected needs
+    options:
+      - text: "[Back to Entry 1]"
+        target: start
+  end:
+    content: |
+      [End of Log]
+    options:
+      - text: "[Back to Entry 1]"
+        target: start
