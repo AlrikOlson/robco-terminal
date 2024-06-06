@@ -183,6 +183,15 @@ class TextRenderer:
                         subline = subline[split_pos:].strip()
         return wrapped_lines
 
+    def _wrap_user_input(self):
+        """
+        Wraps user input text to fit within the maximum width.
+
+        Returns:
+            list: Wrapped user input text lines.
+        """
+        return self._wrap_text(self.user_input_text.splitlines())
+
     def _reset_state(self):
         """
         Resets the state for rendering.
@@ -311,10 +320,20 @@ class TextRenderer:
         Args:
             y: Y coordinate for the user input text.
         """
-        user_input_surface = self.font.render(self.user_input_text, True, self.color)
-        self.screen.blit(user_input_surface, (self.margin[0], y))
-        cursor_x = self.margin[0] + self.font.size(self.user_input_text)[0]
-        self._render_cursor(cursor_x, y)
+        user_input_lines = self._wrap_user_input()
+        if user_input_lines:
+            for line in user_input_lines:
+                user_input_surface = self.font.render(line, True, self.color)
+                self.screen.blit(user_input_surface, (self.margin[0], y))
+                y += self.line_height
+
+            cursor_y = y - self.line_height
+            cursor_x = self.margin[0] + self.font.size(user_input_lines[-1])[0]
+        else:
+            cursor_y = y
+            cursor_x = self.margin[0]
+
+        self._render_cursor(cursor_x, cursor_y)
 
     def _render_line(self, line, y):
         """
