@@ -1,38 +1,40 @@
-# business_terminal.yaml (Updated)
 nodes:
   start:
     content: |
       [RobCo Industries - Employee Terminal]
-      Welcome to the RobCo Industries Employee Terminal. Please select a log entry to review.
+      Welcome to the RobCo Industries Employee Terminal. Select an option:
 
-      Note: Unauthorized access is strictly prohibited.
     options:
-      - text: "[Project Update]"
-        target: project_update
-      - text: "[Security Incident Report]"
-        target: security_incident
-      - text: "[Employee Records]"
-        target: employee_records
-      - text: "[OpenAI Support]"
+      - text: "[Read Announcement]"
+        target: announcement
+      - text: "[Employee Directory]"
+        target: directory
+      - text: "[AI Support]"
+        target: ai_support
+  announcement:
+    content: |
+      [Announcement]
+      This is a test announcement to demonstrate the emulator capabilities.
+
+    options:
+      - text: "[Back to Main Menu]"
+        target: start
+  directory:
+    content: |
+      [Employee Directory]
+      - John Doe: Software Engineer
+      - Jane Smith: Project Manager
+
+    options:
+      - text: "[Back to Main Menu]"
+        target: start
+  ai_support:
+    content: |
+      [RobCo Industries - AI Support Terminal]
+      Welcome to the AI Support Terminal. How can I assist you today?
+
+    options:
+      - text: "[Ask a question]"
         conversational: true
-  project_update:
-    content: |
-      [Project Update]
-      ...
-    options:
-      - text: "[Back to Main Menu]"
-        target: start
-  security_incident:
-    content: |
-      [Security Incident Report]
-      ...
-    options:
-      - text: "[Back to Main Menu]"
-        target: start
-  employee_records:
-    content: |
-      [Employee Records]
-      ...
-    options:
-      - text: "[Back to Main Menu]"
+      - text: "[Back to Employee Terminal]"
         target: start
