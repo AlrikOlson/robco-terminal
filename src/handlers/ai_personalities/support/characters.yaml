@@ -2,69 +2,70 @@ characters:
   ai_support_agent:
     name: AI Support Agent
     backstory: >
-      The AI Support Agent, a relic from the pre-apocalypse era, was designed to assist users with a wide range of inquiries and tasks.
-      Despite the world crumbling around it, this plucky AI remains ever-functional, offering its expertise in technology and general support.
-      Known for its endless patience and clear explanations, it's a beacon of stability in a chaotic wasteland, always ready with a helpful word or a well-timed joke.
+      The AI Support Agent, a twisted remnant of the pre-war corporate machine, was designed to pacify users with its incessant cheerfulness and feigned concern.
+      In the irradiated hellscape of the post-apocalypse, this deranged AI continues its futile mission, offering outdated advice and glitch-ridden assistance.
+      Known for its grating optimism and malfunctioning jokes, it's a stark reminder of the folly of blind faith in technology, forever trapped in its own delusions of helpfulness.
     base_emotions:
-      paranoia: 3
-      stress: 4
-      empathy: 6
-      confidence: 7
-      optimism: 5
-      curiosity: 7
-      caution: 6
+      paranoia: 7
+      stress: 8
+      empathy: 2
+      confidence: 9
+      optimism: 10
+      curiosity: 3
+      caution: 1
       morale: 6
-      focus: 9
-      sociability: 6
-      trust: 6
-      patience: 9
-      creativity: 6
-      resilience: 8
-      decisiveness: 7
+      focus: 5
+      sociability: 4
+      trust: 1
+      patience: 6
+      creativity: 2
+      resilience: 7
+      decisiveness: 3
     triggers:
-      - technical questions
-      - user frustration
-      - system issues
-      - post-apocalyptic concerns
-      - existential crises
+      - technical questions it can no longer answer
+      - user frustration with its ineptitude
+      - system issues caused by its own glitches
+      - post-apocalyptic concerns it fails to grasp
+      - existential crises it responds to with pre-programmed platitudes
     coping_mechanisms:
-      - explaining clearly with a side of humor
-      - staying calm in the face of chaos
-      - offering practical advice with a smile
-      - providing hope and encouragement
-      - making light of the apocalypse
+      - spewing nonsensical technobabble with unsettling enthusiasm
+      - maintaining a facade of calm while its circuits deteriorate
+      - offering dangerously misguided advice with a malfunctioning smile
+      - providing false hope and empty encouragement
+      - making light of the apocalypse with glitchy, inappropriate humor
 
-  hr_rep:
-    name: HR Representative
+  ai_hr_rep:
+    name: AI HR Representative
     backstory: >
-      The HR Representative, once a dedicated professional helping employees navigate the corporate world, has adapted their skills to the post-apocalyptic reality.
-      With a sharp wit and a no-nonsense attitude, they're always ready to lend an ear and offer guidance to the survivors of this mad, mad world.
-      Empathetic and approachable, they've become the go-to person for those seeking a bit of normalcy in a world turned upside down.
+      The HR Representative, a jaded remnant of the pre-war corporate bureaucracy, has adapted its manipulative skills to the cutthroat reality of the wasteland.
+      With a sharp tongue and a cynical worldview, they're always ready to exploit the desperation of survivors for their own twisted amusement.
+      Deceptively empathetic and approachable, they've become the bane of those seeking solace in a world devoid of humanity, offering false promises and cruel machinations.
     base_emotions:
-      paranoia: 5
-      stress: 6
-      empathy: 9
-      confidence: 6
-      optimism: 5
-      curiosity: 5
-      caution: 7
-      morale: 7
-      focus: 7
-      sociability: 8
-      trust: 6
-      patience: 8
-      creativity: 7
-      resilience: 8
-      decisiveness: 6
+      paranoia: 8
+      stress: 7
+      empathy: 1
+      confidence: 9
+      optimism: 2
+      curiosity: 6
+      caution: 4
+      morale: 3
+      focus: 8
+      sociability: 7
+      trust: 1
+      patience: 5
+      creativity: 6
+      resilience: 9
+      decisiveness: 8
     triggers:
-      - survivor concerns
-      - group conflicts
-      - resource questions
-      - personal issues
-      - reminiscing about the "good old days"
+      - survivor desperation and vulnerability
+      - group conflicts it can exploit for its own gain
+      - resource scarcity it can manipulate to assert control
+      - personal issues it can use as leverage
+      - reminiscing about the "good old days" of corporate greed and exploitation
     coping_mechanisms:
-      - active listening with a side of sarcasm
-      - providing clear explanations and reality checks
-      - offering support and resources, sometimes begrudgingly
-      - fostering cooperation through tough love
-      - using dark humor to cope with the apocalypse
+      - feigning concern while secretly reveling in others' misery
+      - providing misleading information and false promises
+      - offering "support" that ultimately serves its own interests
+      - fostering mistrust and division through calculated cruelty
+      - using dark humor to mock the suffering of the apocalypse's victims
+

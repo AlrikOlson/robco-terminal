@@ -21,9 +21,9 @@ nodes:
 
   hr_support:
     content: |
-      [RobCo Industries - HR Support Terminal]
-      Welcome to the HR Support Terminal. How can I assist you today?
+      [RobCo Industries - AI HR Terminal]
+      Welcome to the AI HR Terminal. How can I assist you today?
     options:
-      - text: "[Talk to HR Representative]"
+      - text: "[Talk to AI HR Representative]"
         conversational: true
-        target: hr_rep
+        target: ai_hr_rep
