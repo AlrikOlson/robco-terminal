@@ -128,8 +128,21 @@ Narratives are managed using classes derived from `BaseNarrative`. Here's a gene
 
 This mode allows for dynamic, free-form text input and integrates with AI models to generate character responses. Here's a general overview:
 
-1. **Enabling Conversational Mode**: Set this mode in the YAML file for dynamic interactions.
+1. **Enabling Conversational Mode**: Set this mode in the YAML file for dynamic interactions using the `conversational` attribute.
 2. **Processing Input**: Player input is processed and sent to an AI model to generate responses.
+
+For example, enabling conversational mode:
+
+```yaml
+nodes:
+  start:
+    content: |
+      [AI Support]
+      Welcome to the AI Support terminal. You can ask any questions you have.
+    options:
+      - text: "[Start Conversation]"
+        conversational: true  # Enabling conversational mode
+```
 
 ## AI Context YAML Files
 
@@ -139,18 +152,49 @@ The AI context YAML files provide the necessary setup for character and setting 
 
 Defines characters for AI conversations with attributes like:
 
-- `name`: Character's name.
-- `backstory`: A brief background.
-- `base_emotions`: Initial emotional state.
-- `triggers`: Emotional triggers.
-- `coping_mechanisms`: Coping mechanisms.
+```yaml
+characters:
+  dr_jane_doe:
+    name: Dr. Jane Doe
+    backstory: >
+      Dr. Jane Doe is a highly skilled scientist specializing in bioengineering and cybernetics. She has a calm demeanor and is often seen as a mentor figure within the vault. She remains dedicated to her research, working tirelessly to improve the quality of life for all vault residents.
+    base_emotions:
+      paranoia: 3
+      stress: 4
+      empathy: 8
+      confidence: 7
+      optimism: 6
+      curiosity: 9
+      caution: 5
+      morale: 6
+      focus: 8
+      sociability: 5
+      trust: 7
+      patience: 8
+      creativity: 7
+      resilience: 6
+      decisiveness: 7
+    triggers:
+      - unethical behavior
+      - scientific breakthroughs
+      - threats to the vault
+    coping_mechanisms:
+      - deep breathing exercises
+      - focusing on research
+      - mentoring others
+```
 
 ### Setting YAML File
 
 Defines the background and setting for AI interactions:
 
-- `background`: General context and environment.
-- `setting`: Specific description of the interaction setting.
+```yaml
+background: >
+  The vault is a self-contained underground complex designed to house residents for extended periods. It features residential quarters, scientific research labs, communal dining areas, and recreational facilities. Life in the vault is structured and regulated to ensure the well-being of its inhabitants.
+
+setting: >
+  The setting of this interaction is Dr. Jane Doe's laboratory. The lab is well-lit and organized, with various scientific instruments and research materials neatly arranged. The hum of machinery and the soft glow of computer screens create an atmosphere of focused innovation.
+```
 
 ## Contributing
 
