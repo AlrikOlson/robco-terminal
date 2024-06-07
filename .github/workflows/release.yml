@@ -54,7 +54,7 @@ jobs:
       id: compute_checksum
       run: |
         $sha256 = Get-FileHash -Path ./dist/robco-terminal.exe -Algorithm SHA256
-        echo "sha256=$($sha256.Hash)" >> $env:GITHUB_ENV
+        echo "sha256=$($sha256.Hash)" >> $env:GITHUB_OUTPUT
 
     - name: Create Release
       id: create_release
