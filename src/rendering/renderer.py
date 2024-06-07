@@ -1,33 +1,67 @@
 import OpenGL.GL as gl
 import numpy as np
-
-
 import ctypes
 
 
 class Renderer:
 
     @staticmethod
-    def render_texture(shader_program, time):
-        """
-        Renders the texture using OpenGL.
+    def render_texture(shader_program, time, width, height):
+        bloom_fbo, bloom_texture = Renderer.create_fbo(width, height)
 
-        Args:
-            shader_program: The shader program.
-            time: The current time to pass to the shader.
-        """
+        # First pass: render the scene to the bloom FBO
+        gl.glBindFramebuffer(gl.GL_FRAMEBUFFER, bloom_fbo)
+        gl.glViewport(0, 0, width, height)  # Set viewport to FBO size
         gl.glClear(gl.GL_COLOR_BUFFER_BIT | gl.GL_DEPTH_BUFFER_BIT)
         gl.glUseProgram(shader_program)
-        
+        bloom_threshold_location = gl.glGetUniformLocation(shader_program, "BloomThreshold")
+        gl.glUniform1f(bloom_threshold_location, 1)  # Adjust the threshold as needed
+        Renderer._render_scene(shader_program, time)
+
+        # Second pass: blur the bloom texture and combine with the original scene
+        gl.glBindFramebuffer(gl.GL_FRAMEBUFFER, 0)
+        gl.glViewport(0, 0, width, height)  # Set viewport to screen size
+        gl.glClear(gl.GL_COLOR_BUFFER_BIT | gl.GL_DEPTH_BUFFER_BIT)
+        gl.glUseProgram(shader_program)
+        bloom_texture_location = gl.glGetUniformLocation(shader_program, "BloomTexture")
+        gl.glActiveTexture(gl.GL_TEXTURE1)
+        gl.glBindTexture(gl.GL_TEXTURE_2D, bloom_texture)
+        gl.glUniform1i(bloom_texture_location, 1)
+        Renderer._render_scene(shader_program, time)
+
+        gl.glBindFramebuffer(gl.GL_FRAMEBUFFER, 0)
+        gl.glDeleteFramebuffers(1, [bloom_fbo])
+        gl.glDeleteTextures([bloom_texture])
+
+
+    @staticmethod
+    def _render_scene(shader_program, time):
         # Set the time uniform
         time_uniform_location = gl.glGetUniformLocation(shader_program, "Time")
         gl.glUniform1f(time_uniform_location, time)
-        
+
         vertices = Renderer._create_vertices()
         vbo = Renderer._create_vbo(vertices)
         Renderer._setup_vertex_attributes(shader_program)
         Renderer._draw_vertices()
         Renderer._cleanup_vertex_attributes(vbo, shader_program)
+
+    @staticmethod
+    def create_fbo(width, height):
+        fbo = gl.glGenFramebuffers(1)
+        gl.glBindFramebuffer(gl.GL_FRAMEBUFFER, fbo)
+
+        texture = gl.glGenTextures(1)
+        gl.glBindTexture(gl.GL_TEXTURE_2D, texture)
+        gl.glTexImage2D(gl.GL_TEXTURE_2D, 0, gl.GL_RGBA, width, height, 0, gl.GL_RGBA, gl.GL_UNSIGNED_BYTE, None)
+        gl.glTexParameteri(gl.GL_TEXTURE_2D, gl.GL_TEXTURE_MIN_FILTER, gl.GL_LINEAR)
+        gl.glTexParameteri(gl.GL_TEXTURE_2D, gl.GL_TEXTURE_MAG_FILTER, gl.GL_LINEAR)
+        gl.glFramebufferTexture2D(gl.GL_FRAMEBUFFER, gl.GL_COLOR_ATTACHMENT0, gl.GL_TEXTURE_2D, texture, 0)
+
+        gl.glBindFramebuffer(gl.GL_FRAMEBUFFER, 0)
+        gl.glBindTexture(gl.GL_TEXTURE_2D, 0)
+
+        return fbo, texture
 
     @staticmethod
     def _create_vertices():

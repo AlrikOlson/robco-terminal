@@ -1,3 +1,4 @@
+import pygame
 from src.scenes.menu_scene import MenuScene
 
 class SuccessScene(MenuScene):
@@ -25,4 +26,5 @@ class SuccessScene(MenuScene):
         elif selected_option == "Log out":
             self.app.set_scene('login_scene')
         elif selected_option == "Quit":
-            return True
+            pygame.event.post(pygame.event.Event(pygame.QUIT))
+        return False

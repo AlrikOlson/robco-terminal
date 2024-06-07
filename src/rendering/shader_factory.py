@@ -29,6 +29,10 @@ class ShaderFactory:
         uniform vec2 Resolution;
         uniform vec4 Background;
         uniform vec3 BacklightColor;
+        uniform float LuminanceIntensity;
+        uniform float BloomThreshold;
+        uniform sampler2D BloomTexture;
+
 
         // Ray-tracing like defines
         #define MAX_RAY_STEPS 200
@@ -36,7 +40,7 @@ class ShaderFactory:
         #define MAX_DISTANCE 100.0
 
         #define ENABLE_CURVE 1
-        #define ENABLE_OVERSCAN 1
+        #define ENABLE_OVERSCAN 0
         #define ENABLE_BLOOM 1
         #define ENABLE_BLUR 1
         #define ENABLE_GRAYSCALE 1
@@ -107,9 +111,20 @@ class ShaderFactory:
 
         #if ENABLE_BLOOM
         vec3 bloom(vec3 color, vec2 uv) {
-            vec3 bloom = color - texture(textureSampler, uv + vec2(-BLOOM_OFFSET, 0.0) * Scale).rgb;
-            vec3 bloom_mask = bloom * BLOOM_STRENGTH;
-            return clamp01(color + bloom_mask);
+            vec3 bloom = vec3(0.0);
+            vec2 texelSize = 1.0 / vec2(textureSize(BloomTexture, 0));
+            
+            for (int i = -4; i <= 4; i++) {
+                for (int j = -4; j <= 4; j++) {
+                    vec2 offset = vec2(float(i), float(j)) * texelSize * BLOOM_OFFSET;
+                    bloom += texture(BloomTexture, uv + offset).rgb;
+                }
+            }
+            
+            bloom /= 81.0;
+            bloom *= BLOOM_STRENGTH;
+            
+            return clamp01(color + bloom);
         }
         #endif
 
@@ -158,7 +173,9 @@ class ShaderFactory:
         }
 
         vec3 rgb2luminance(vec3 c) {
-            return vec3(0.2989 * c.r + 0.5866 * c.g + 0.1145 * c.b);
+            float luminance = dot(c, vec3(0.2126, 0.7152, 0.0722));
+            luminance *= LuminanceIntensity;
+            return vec3(luminance);
         }
 
         vec3 rgb2luma(vec3 c) {
@@ -197,7 +214,7 @@ class ShaderFactory:
             float timeOver = fract(Time / 5.0) * 1.5 - 0.5;
             float refreshLineColorTint = timeOver - uv.y;
             float scanLineWidth = 0.03; // Adjust the width of the scan line
-            float gradientFactor = -3.0; // Adjust the gradient intensity
+            float gradientFactor = 1.0; // Adjust the gradient intensity
             
             if (uv.y > timeOver && uv.y - scanLineWidth < timeOver) {
                 float gradientIntensity = (timeOver - uv.y) / scanLineWidth;
@@ -317,6 +334,14 @@ class ShaderFactory:
             #endif
 
             vec4 color = texture(textureSampler, uv);
+            
+            // Apply bloom threshold
+            float luminance = dot(color.rgb, vec3(0.2126, 0.7152, 0.0722));
+            if (luminance > BloomThreshold) {
+                vec3 bloomColor = bloom(color.rgb, uv);
+                color.rgb = mix(color.rgb, bloomColor, BLOOM_STRENGTH);
+            }
+
             if (color.a < 0.5) {
                 vec3 ray_origin = vec3(uv, -3.0);
                 vec3 ray_dir = normalize(vec3(0.0, 0.0, 1.0));
@@ -385,6 +410,8 @@ class ShaderFactory:
         gl.glUniform2f(gl.glGetUniformLocation(shader_program, "Resolution"), 800.0, 600.0)
         gl.glUniform4f(gl.glGetUniformLocation(shader_program, "Background"), 0.0, 0.0, 0.0, 1.0)
         gl.glUniform3f(gl.glGetUniformLocation(shader_program, "BacklightColor"), 0.2, 0.2, 0.2)
+        gl.glUniform1f(gl.glGetUniformLocation(shader_program, "LuminanceIntensity"), 2.6)
+        gl.glUniform1f(gl.glGetUniformLocation(shader_program, "BloomThreshold"), 0.1)
 
         return shader_program
 

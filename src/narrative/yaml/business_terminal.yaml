@@ -7,8 +7,6 @@ nodes:
         target: ai_support
       - text: "[Talk to Human Resources]"
         target: hr_support
-      - text: "[Back to Main Menu]"
-        target: main_menu
 
   ai_support:
     content: |

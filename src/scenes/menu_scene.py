@@ -1,4 +1,3 @@
-# menu_scene.py
 import pygame
 from src.scenes.base_scene import BaseScene
 from src.scenes.mixins.menu_support_mixin import MenuSupportMixin

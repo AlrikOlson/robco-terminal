@@ -47,7 +47,7 @@ class TerminalScreen:
         self.overlay.blit(surface, (0, 0))
         texture_id = TextureManager.create_texture_id(self.overlay)
         TextureManager.bind_texture(texture_id, self.curvature_shader)
-        Renderer.render_texture(self.curvature_shader, current_time)
+        Renderer.render_texture(self.curvature_shader, current_time, self.width, self.height)
         pygame.display.flip()
         TextureManager.cleanup(texture_id)
 
