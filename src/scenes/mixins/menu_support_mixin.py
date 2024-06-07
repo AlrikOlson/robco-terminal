@@ -18,26 +18,36 @@ class MenuSupportMixin:
         border_radius = 8   # Border radius
 
         for i, option in enumerate(self.menu_options):
+            text = option
+            option_surface = font.render(text, True, GREEN)
+            
+            # Get the dimensions of the text surface
+            text_width, text_height = option_surface.get_size()
+            
+            # Create a new surface for the background rectangle
+            bg_width = text_width + padding * 2
+            bg_height = text_height + padding * 2
+            bg_surface = pygame.Surface((bg_width, bg_height), pygame.SRCALPHA)
+            
             if i == self.selected_option:
-                # Render with normal text color (green) and draw border around
-                text_color = GREEN
-                border_color = GREEN
+                # Fill the background surface with the text color (green)
+                bg_surface.fill(GREEN)
+                
+                # Render the text with transparent color
+                text_surface = font.render(text, True, (0, 0, 0, 0))
+                
+                # Blit the text surface onto the background surface
+                bg_surface.blit(text_surface, (padding, padding))
             else:
-                # Render with normal text color (green) and no border
-                text_color = GREEN
-                border_color = None
+                # Render the text with normal text color (green)
+                text_surface = font.render(text, True, GREEN)
+                
+                # Blit the text surface onto the background surface
+                bg_surface.blit(text_surface, (padding, padding))
             
-            text = "> " + option if i == self.selected_option else "  " + option
-            option_surface = font.render(text, True, text_color)
-            
-            # Draw border rectangle if selected
-            rect = option_surface.get_rect(topleft=(50, y_offset))
-            if border_color:
-                self._draw_rounded_rect(surface, rect.inflate(padding, padding), border_color, border_thickness, border_radius)
-            
-            # Blit the text onto the screen
-            surface.blit(option_surface, rect.topleft)
-            y_offset += 30
+            # Blit the background surface onto the screen
+            surface.blit(bg_surface, (50, y_offset))
+            y_offset += bg_height
 
     def _draw_rounded_rect(self, surface, rect, color, thickness, radius):
         """

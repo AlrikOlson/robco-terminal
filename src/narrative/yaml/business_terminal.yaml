@@ -1,27 +1,51 @@
 nodes:
   start:
     content: |
-      Welcome to the Business Terminal. Please select an option:
+      *** ROBCO INDUSTRIES UNIFIED OPERATING SYSTEM ***
+      *** COPYRIGHT 2075-2077 ROBCO INDUSTRIES ***
+      **** SERVER 6 ****
+
+      Welcome to the RobCo Business Terminal. Please select an option:
     options:
-      - text: "[Talk to AI Support Agent]"
-        target: ai_support
-      - text: "[Talk to Human Resources]"
-        target: hr_support
+      - text: "Initiate Communication with a Representative"
+        target: representatives
+
+  representatives:
+    content: |
+      *** ROBCO INDUSTRIES UNIFIED OPERATING SYSTEM ***
+      *** COPYRIGHT 2075-2077 ROBCO INDUSTRIES ***
+      **** SERVER 6 ****
+
+      RobCo Industries - Representative Terminal
+      Select the desired representative:
+    options:
+      - text: "Initiate AI Support Agent Communication"
+        target: ai_support_agent
+      - text: "Initiate AI HR Representative Communication"
+        target: ai_hr_rep
 
   ai_support:
     content: |
-      [RobCo Industries - AI Support Terminal]
-      Welcome to the AI Support Terminal. How can I assist you today?
+      *** ROBCO INDUSTRIES UNIFIED OPERATING SYSTEM ***
+      *** COPYRIGHT 2075-2077 ROBCO INDUSTRIES ***
+      **** SERVER 6 ****
+
+      RobCo Industries - AI Support Terminal
+      Greetings, user. How may this AI Support Agent assist you today?
     options:
-      - text: "[Talk to AI Support Agent]"
+      - text: "Engage in Dialogue with AI Support Agent"
         conversational: true
         target: ai_support_agent
 
   hr_support:
     content: |
-      [RobCo Industries - AI HR Terminal]
-      Welcome to the AI HR Terminal. How can I assist you today?
+      *** ROBCO INDUSTRIES UNIFIED OPERATING SYSTEM ***
+      *** COPYRIGHT 2075-2077 ROBCO INDUSTRIES ***
+      **** SERVER 6 ****
+
+      RobCo Industries - AI HR Terminal
+      Greetings, employee. How may this AI HR Representative assist you today?
     options:
-      - text: "[Talk to AI HR Representative]"
+      - text: "Engage in Dialogue with AI HR Representative"
         conversational: true
         target: ai_hr_rep

@@ -51,7 +51,7 @@ class ShaderFactory:
         #define ENABLE_GRAIN 1
         #define ENABLE_BACKLIGHT 0
 
-        #define CURVE_INTENSITY 1
+        #define CURVE_INTENSITY 0.3
         #define OVERSCAN_PERCENTAGE 0.02
         #define BLOOM_OFFSET 0.0015
         #define BLOOM_STRENGTH 0.8
