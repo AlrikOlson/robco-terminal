@@ -26,6 +26,9 @@ class SceneFactory:
             'vault_overseer': NarrativeScene(app, SceneFactory._load_chapter('vault_overseer.yaml')),
             'research_log': NarrativeScene(app, SceneFactory._load_chapter('research_log.yaml')),
             'business_terminal': NarrativeScene(app, SceneFactory._load_chapter('business_terminal.yaml')),
+            'vault149_medical_terminal': NarrativeScene(app, SceneFactory._load_chapter('vault149/medical_terminal.yaml')),
+            'vault149_overseer_terminal': NarrativeScene(app, SceneFactory._load_chapter('vault149/overseer_terminal.yaml')),
+            'vault149_security_terminal': NarrativeScene(app, SceneFactory._load_chapter('vault149/security_terminal.yaml')),
         }
 
     @staticmethod

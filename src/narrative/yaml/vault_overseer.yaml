@@ -1,71 +1,55 @@
 nodes:
   start:
     content: |
-      OVERSEER'S LOG
-      ---------------
-      > ENTRY 1
-      > ENTRY 2
-      > ENTRY 3
-      > ENTRY 4
-      > RETURN TO MAIN MENU
+      VAULT OVERSEER'S LOG
+      --------------------
+      > ACCESS ENTRY 1
+      > ACCESS ENTRY 2
+      > ACCESS ENTRY 3
+      > ACCESS ENTRY 4
     options:
-      - text: "ENTRY 1"
+      - text: "> ACCESS ENTRY 1"
         target: entry_1
-      - text: "ENTRY 2"
+      - text: "> ACCESS ENTRY 2"
         target: entry_2
-      - text: "ENTRY 3"
+      - text: "> ACCESS ENTRY 3"
         target: entry_3
-      - text: "ENTRY 4"
+      - text: "> ACCESS ENTRY 4"
         target: entry_4
-      - text: "RETURN TO MAIN MENU"
-        target: exit
 
   entry_1:
     content: |
-      OVERSEER'S LOG - ENTRY 1
-      ------------------------
-      The vault's main doors have been sealed as per Vault-Tec's standard operating procedures. All residents are accounted for, and the initial orientation is underway. Today's priorities include finalizing the resource management plan and conducting a routine inspection of the water purification system.
+      VAULT OVERSEER'S LOG - ENTRY 1
+      ------------------------------
+      In accordance with Vault-Tec's protocols, the vault has been sealed. All dwellers are accounted for, and the orientation is underway. Priority tasks: finalize resource management and inspect the water purification system. Dr. Morley's research team is settling into their new lab facilities.
     options:
-      - text: "BACK TO LOG"
+      - text: "> RETURN TO OVERSEER'S LOG"
         target: start
 
   entry_2:
     content: |
-      OVERSEER'S LOG - ENTRY 2
-      ------------------------
-      The first day in the vault has proceeded smoothly. Resident morale appears to be high, and they are adjusting well to their new life underground. We encountered a minor issue with one of the air filtration units, but our engineering team resolved it promptly.
+      VAULT OVERSEER'S LOG - ENTRY 2
+      ------------------------------
+      First day in the vault: smooth. Dweller morale: high. Adjusting to underground life: positive. Minor issue with air filtration unit: resolved by engineering team. Dr. Morley reports promising initial results from Experiment 57-A.
     options:
-      - text: "BACK TO LOG"
+      - text: "> RETURN TO OVERSEER'S LOG"
         target: start
 
   entry_3:
     content: |
-      OVERSEER'S LOG - ENTRY 3
-      ------------------------
-      It has come to my attention that some residents are becoming restless. To address this, we've scheduled additional recreational activities to keep everyone occupied. There was a minor disturbance in the cafeteria today, but our security personnel quickly quelled the situation.
+      VAULT OVERSEER'S LOG - ENTRY 3
+      ------------------------------
+      Some dwellers showing restlessness. Solution: increased recreational activities. Minor disturbance in cafeteria: handled by security personnel. Received an urgent report from Dr. Morley about a containment breach in Lab 3. Investigating further.
     options:
-      - text: "BACK TO LOG"
+      - text: "> RETURN TO OVERSEER'S LOG"
         target: start
 
   entry_4:
     content: |
-      OVERSEER'S LOG - ENTRY 4
-      ------------------------
-      Our chief engineer discovered unusual wear on several components of the water purification system. We've initiated a full diagnostic to assess the situation. So far, there are no signs of any major problems, but we'll need to monitor the system closely to ensure optimal performance.
+      VAULT OVERSEER'S LOG - ENTRY 4
+      ------------------------------
+      Chief engineer reports unusual wear on water purification system components. Full diagnostic initiated. No major problems detected. Close monitoring required for optimal performance. Dr. Morley's team is working around the clock to contain the breach. Non-essential personnel have been evacuated from affected areas.
     options:
-      - text: "BACK TO LOG"
+      - text: "> RETURN TO OVERSEER'S LOG"
         target: start
 
-  exit:
-    content: |
-      RETURNING TO MAIN MENU...
-    options:
-      - text: "MAIN MENU LOADED"
-        target: end
-
-  end:
-    content: |
-      [End of Log]
-    options:
-      - text: "[Back to Entry 1]"
-        target: start

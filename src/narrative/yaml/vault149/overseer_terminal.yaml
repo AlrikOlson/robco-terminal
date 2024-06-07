@@ -1,0 +1,157 @@
+nodes:
+  start:
+    content: |
+      OVERSEER'S TERMINAL
+      -------------------
+      > VIEW PERSONAL LOGS
+      > ACCESS VAULT SYSTEMS
+      > COMMUNICATIONS
+    options:
+      - text: "> VIEW PERSONAL LOGS"
+        target: personal_logs
+      - text: "> ACCESS VAULT SYSTEMS"
+        target: vault_systems
+      - text: "> COMMUNICATIONS"
+        target: communications
+
+  personal_logs:
+    content: |
+      PERSONAL LOGS
+      -------------
+      > LOG ENTRY 1
+      > LOG ENTRY 2
+      > LOG ENTRY 3
+    options:
+      - text: "> LOG ENTRY 1"
+        target: log_1
+      - text: "> LOG ENTRY 2"
+        target: log_2
+      - text: "> LOG ENTRY 3"
+        target: log_3
+
+  log_1:
+    content: |
+      PERSONAL LOG - ENTRY 1
+      ----------------------
+      Vault 149 is now operational. The experiment is underway. I have my doubts about the ethics of this, but orders are orders. I'll do what needs to be done. For the greater good.
+    options:
+      - text: "> RETURN TO PERSONAL LOGS"
+        target: personal_logs
+
+  log_2:
+    content: |
+      PERSONAL LOG - ENTRY 2
+      ----------------------
+      The situation in Sector 4 is escalating. The medical team is struggling to find a cause or cure. I've ordered a lockdown to contain the spread. We can't let this jeopardize the entire vault.
+    options:
+      - text: "> RETURN TO PERSONAL LOGS"
+        target: personal_logs
+
+  log_3:
+    content: |
+      PERSONAL LOG - ENTRY 3
+      ----------------------
+      I've made a terrible mistake. The experiment has gone too far. The residents are not just sick; they're changing. Becoming something else. I've sealed off Sector 4, but I fear it's too late. God help us all.
+    options:
+      - text: "> RETURN TO PERSONAL LOGS"
+        target: personal_logs
+
+  vault_systems:
+    content: |
+      VAULT SYSTEMS
+      -------------
+      > LIFE SUPPORT
+      > SECURITY
+      > POWER MANAGEMENT
+    options:
+      - text: "> LIFE SUPPORT"
+        target: life_support
+      - text: "> SECURITY"
+        target: security
+      - text: "> POWER MANAGEMENT"
+        target: power_management
+      - text: "> RETURN TO MAIN MENU"
+        target: start
+
+  life_support:
+    content: |
+      LIFE SUPPORT SYSTEMS
+      --------------------
+      Status: Operational
+      Oxygen Levels: Stable
+      Water Purification: Active
+      Temperature Control: Optimal
+    options:
+      - text: "> RETURN TO VAULT SYSTEMS"
+        target: vault_systems
+
+  security:
+    content: |
+      SECURITY SYSTEMS
+      ----------------
+      Status: Active
+      Patrol Routes: Updated
+      Surveillance Cameras: Online
+      Armory: Secured
+    options:
+      - text: "> RETURN TO VAULT SYSTEMS"
+        target: vault_systems
+
+  power_management:
+    content: |
+      POWER MANAGEMENT
+      ----------------
+      Status: Stable
+      Power Source: Fusion Generator
+      Backup Systems: Online
+      Energy Consumption: Moderate
+    options:
+      - text: "> RETURN TO VAULT SYSTEMS"
+        target: vault_systems
+
+  communications:
+    content: |
+      COMMUNICATIONS
+      --------------
+      > VAULT-TEC HQ
+      > EMERGENCY BROADCAST
+      > EXTERNAL CONTACTS
+    options:
+      - text: "> VAULT-TEC HQ"
+        target: vault_tec_hq
+      - text: "> EMERGENCY BROADCAST"
+        target: emergency_broadcast
+      - text: "> EXTERNAL CONTACTS"
+        target: external_contacts
+      - text: "> RETURN TO MAIN MENU"
+        target: start
+
+  vault_tec_hq:
+    content: |
+      COMMUNICATION WITH VAULT-TEC HQ
+      -------------------------------
+      Connection Status: Pending
+      Last Message: Request for additional medical supplies and personnel
+    options:
+      - text: "> RETURN TO COMMUNICATIONS"
+        target: communications
+
+  emergency_broadcast:
+    content: |
+      EMERGENCY BROADCAST SYSTEM
+      --------------------------
+      Status: Ready
+      Last Broadcast: Lockdown announcement for Sector 4
+    options:
+      - text: "> RETURN TO COMMUNICATIONS"
+        target: communications
+
+  external_contacts:
+    content: |
+      EXTERNAL CONTACTS
+      -----------------
+      Connection Status: Limited
+      Approved Contacts: Military Liaison, Medical Research Facility
+    options:
+      - text: "> RETURN TO COMMUNICATIONS"
+        target: communications

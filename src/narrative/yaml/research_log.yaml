@@ -1,86 +1,71 @@
 nodes:
   start:
     content: |
-      RESEARCH LOG - DR. MORLEY
-      -------------------------
-      > ENTRY 1
-      > ENTRY 2
-      > ENTRY 3
-      > ENTRY 4
-      > EXPERIMENT PROTOCOL
-      > RETURN TO MAIN MENU
+      VAULT-TEC RESEARCH LOG - DR. MORLEY
+      -----------------------------------
+      > ACCESS ENTRY 1
+      > ACCESS ENTRY 2
+      > ACCESS ENTRY 3
+      > ACCESS ENTRY 4
+      > VIEW EXPERIMENT PROTOCOL
     options:
-      - text: "ENTRY 1"
+      - text: "> ACCESS ENTRY 1"
         target: entry_1
-      - text: "ENTRY 2"
+      - text: "> ACCESS ENTRY 2"
         target: entry_2
-      - text: "ENTRY 3"
+      - text: "> ACCESS ENTRY 3"
         target: entry_3
-      - text: "ENTRY 4"
+      - text: "> ACCESS ENTRY 4"
         target: entry_4
-      - text: "EXPERIMENT PROTOCOL"
+      - text: "> VIEW EXPERIMENT PROTOCOL"
         target: experiment_protocol
-      - text: "RETURN TO MAIN MENU"
-        target: exit
 
   entry_1:
     content: |
-      RESEARCH LOG - ENTRY 1
-      ----------------------
-      Experiment 57-A is yielding promising results. The mutated flora samples are adapting well to the new growth medium. The next phase of the experiment will involve exposing the samples to low levels of radiation to observe any further mutations.
+      VAULT-TEC RESEARCH LOG - ENTRY 1
+      --------------------------------
+      Experiment 57-A: promising results. Mutated flora samples adapting well to new growth medium. Next phase: expose samples to low radiation levels. Observe further mutations. Vault Overseer has provided us with state-of-the-art facilities. Excited to see where this research leads.
     options:
-      - text: "BACK TO LOG"
+      - text: "> RETURN TO RESEARCH LOG"
         target: start
 
   entry_2:
     content: |
-      RESEARCH LOG - ENTRY 2
-      ----------------------
-      Disaster struck today. An unexpected power surge caused a containment breach in Lab 3. The mutated plants have spread beyond our control. We've sealed off the affected areas, but the situation remains precarious.
+      VAULT-TEC RESEARCH LOG - ENTRY 2
+      --------------------------------
+      Disaster: unexpected power surge caused containment breach in Lab 3. Mutated plants spreading beyond control. Affected areas sealed. Situation precarious. Informed Vault Overseer and requested additional security measures. Must contain this before it threatens the entire vault.
     options:
-      - text: "BACK TO LOG"
+      - text: "> RETURN TO RESEARCH LOG"
         target: start
 
   entry_3:
     content: |
-      RESEARCH LOG - ENTRY 3
-      ----------------------
-      The vault's emergency protocols have been activated. We're attempting to destroy the plants with controlled burns, but progress is slow. Morale among the staff is deteriorating rapidly.
+      VAULT-TEC RESEARCH LOG - ENTRY 3
+      --------------------------------
+      Vault emergency protocols activated. Attempting to destroy plants with controlled burns. Progress slow. Staff morale deteriorating rapidly. Vault Overseer has been supportive, but tensions are running high among the dwellers. We need to resolve this quickly.
     options:
-      - text: "BACK TO LOG"
+      - text: "> RETURN TO RESEARCH LOG"
         target: start
 
   entry_4:
     content: |
-      RESEARCH LOG - ENTRY 4
-      ----------------------
-      This may be my final entry. The plants have overwhelmed our defenses. I've ordered a complete evacuation of all non-essential personnel. If anyone finds this log, remember: curiosity and carelessness have dire consequences.
+      VAULT-TEC RESEARCH LOG - ENTRY 4
+      --------------------------------
+      Final entry. Plants have overwhelmed defenses. Ordered complete evacuation of non-essential personnel. If log found, remember: curiosity and carelessness have dire consequences. To the Vault Overseer: I'm sorry. We never meant for this to happen. Vault-Tec's pursuit of progress blinded us to the risks.
     options:
-      - text: "BACK TO LOG"
+      - text: "> RETURN TO RESEARCH LOG"
         target: start
 
   experiment_protocol:
     content: |
-      EXPERIMENT 57-A PROTOCOL
-      ------------------------
+      VAULT-TEC EXPERIMENT 57-A PROTOCOL
+      ----------------------------------
       - Subject: Mutated flora sample #23
       - Growth Medium: Enhanced nutrient solution with trace elements
       - Radiation Exposure: 0.5 rads/hour
       - Expected Outcome: Increased growth rate and mutation frequency
+      - Note: Ensure proper containment measures are in place. Consult with Vault Overseer before proceeding to next phase.
     options:
-      - text: "BACK TO LOG"
+      - text: "> RETURN TO RESEARCH LOG"
         target: start
 
-  exit:
-    content: |
-      RETURNING TO MAIN MENU...
-    options:
-      - text: "MAIN MENU LOADED"
-        target: end
-
-  end:
-    content: |
-      [End of Log]
-    options:
-      - text: "[Back to Entry 1]"
-        target: start

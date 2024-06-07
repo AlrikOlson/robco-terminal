@@ -1,60 +1,46 @@
 nodes:
   start:
     content: |
-      BUSINESS TERMINAL
-      -----------------
+      ROBCO INDUSTRIES UNIFIED OPERATING SYSTEM
+      COPYRIGHT 2075-2077 ROBCO INDUSTRIES
+      -----------------------------------------
     options:
-      - text: "INITIATE COMMUNICATION WITH A REPRESENTATIVE"
+      - text: "> INITIATE VAULT-TEC REPRESENTATIVE COMMUNICATION"
         target: representatives
-      - text: "RETURN TO MAIN MENU"
-        target: exit
 
   representatives:
     content: |
-      REPRESENTATIVE TERMINAL
-      -----------------------
+      VAULT-TEC REPRESENTATIVE TERMINAL
+      ---------------------------------
     options:
-      - text: "INITIATE AI SUPPORT AGENT COMMUNICATION"
+      - text: "> INITIATE VAULT-TEC AI SUPPORT AGENT COMMUNICATION"
         target: ai_support
-      - text: "INITIATE AI HR REPRESENTATIVE COMMUNICATION"
+      - text: "> INITIATE VAULT-TEC AI HR REPRESENTATIVE COMMUNICATION"
         target: hr_support
-      - text: "BACK TO TERMINAL MENU"
+      - text: "> RETURN TO MAIN MENU"
         target: start
 
   ai_support:
     content: |
-      AI SUPPORT TERMINAL
-      -------------------
-      Greetings, user. How may this AI Support Agent assist you today?
+      VAULT-TEC AI SUPPORT TERMINAL
+      -----------------------------
+      Welcome, Vault Dweller. We've received reports of unusual plant growth in some areas of the vault. Please exercise caution and report any sightings to the research team immediately.
     options:
-      - text: "ENGAGE IN DIALOGUE WITH AI SUPPORT AGENT"
+      - text: "> ENGAGE IN DIALOGUE WITH VAULT-TEC AI SUPPORT AGENT"
         conversational: true
         target: ai_support_agent
-      - text: "BACK TO REPRESENTATIVE MENU"
+      - text: "> RETURN TO VAULT-TEC REPRESENTATIVE MENU"
         target: representatives
 
   hr_support:
     content: |
-      AI HR TERMINAL
-      --------------
-      Greetings, employee. How may this AI HR Representative assist you today?
+      VAULT-TEC AI HR TERMINAL
+      ------------------------
+      Greetings, Vault Dweller. Due to recent incidents, we've scheduled additional recreational activities to help maintain morale. If you have any concerns, please don't hesitate to reach out.
     options:
-      - text: "ENGAGE IN DIALOGUE WITH AI HR REPRESENTATIVE"
+      - text: "> ENGAGE IN DIALOGUE WITH VAULT-TEC AI HR REPRESENTATIVE"
         conversational: true
         target: ai_hr_rep
-      - text: "BACK TO REPRESENTATIVE MENU"
+      - text: "> RETURN TO VAULT-TEC REPRESENTATIVE MENU"
         target: representatives
 
-  exit:
-    content: |
-      RETURNING TO MAIN MENU...
-    options:
-      - text: "MAIN MENU LOADED"
-        target: end
-
-  end:
-    content: |
-      [End of Log]
-    options:
-      - text: "[Back to Entry 1]"
-        target: start

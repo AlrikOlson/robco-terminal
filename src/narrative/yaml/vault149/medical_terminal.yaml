@@ -1,0 +1,231 @@
+nodes:
+  start:
+    content: |
+      VAULT-TEC MEDICAL TERMINAL
+      --------------------------
+      > ACCESS PATIENT RECORDS
+      > VIEW MEDICAL LOGS
+      > RESEARCH DATA
+    options:
+      - text: "> ACCESS PATIENT RECORDS"
+        target: patient_records
+      - text: "> VIEW MEDICAL LOGS"
+        target: medical_logs
+      - text: "> RESEARCH DATA"
+        target: research_data
+
+  patient_records:
+    content: |
+      PATIENT RECORDS
+      ---------------
+      > RECORD 1: J. DOE - ADMITTED 10.15.2077
+      > RECORD 2: S. SMITH - ADMITTED 11.02.2077
+      > RECORD 3: M. JOHNSON - ADMITTED 11.23.2077
+    options:
+      - text: "> RECORD 1"
+        target: record_1
+      - text: "> RECORD 2"
+        target: record_2
+      - text: "> RECORD 3"
+        target: record_3
+      - text: "> RETURN TO MAIN MENU"
+        target: start
+
+  record_1:
+    content: |
+      PATIENT RECORD - J. DOE
+      -----------------------
+      Admission Date: 10.15.2077
+      Symptoms: Fever, dizziness, muscle weakness
+      Treatment: Rest, hydration, antibiotics
+      Status: Stable
+    options:
+      - text: "> RETURN TO PATIENT RECORDS"
+        target: patient_records
+
+  record_2:
+    content: |
+      PATIENT RECORD - S. SMITH
+      -------------------------
+      Admission Date: 11.02.2077
+      Symptoms: Headache, confusion, aggressive behavior
+      Treatment: Sedatives, observation, blood tests
+      Status: Quarantined
+    options:
+      - text: "> RETURN TO PATIENT RECORDS"
+        target: patient_records
+
+  record_3:
+    content: |
+      PATIENT RECORD - M. JOHNSON
+      ---------------------------
+      Admission Date: 11.23.2077
+      Symptoms: Hallucinations, paranoia, self-harm
+      Treatment: Isolation, antipsychotics, psychological evaluation
+      Status: Critical
+    options:
+      - text: "> RETURN TO PATIENT RECORDS"
+        target: patient_records
+
+  medical_logs:
+    content: |
+      MEDICAL LOGS
+      ------------
+      > LOG ENTRY 1
+      > LOG ENTRY 2
+      > LOG ENTRY 3
+    options:
+      - text: "> LOG ENTRY 1"
+        target: log_1
+      - text: "> LOG ENTRY 2"
+        target: log_2
+      - text: "> LOG ENTRY 3"
+        target: log_3
+      - text: "> BACK"
+        target: start
+
+  log_1:
+    content: |
+      MEDICAL LOG - ENTRY 1
+      ---------------------
+      Vault population stable. No major health concerns. Routine check-ups scheduled. Medical supplies well-stocked. Prepared for any emergencies.
+    options:
+      - text: "> RETURN TO MEDICAL LOGS"
+        target: medical_logs
+
+  log_2:
+    content: |
+      MEDICAL LOG - ENTRY 2
+      ---------------------
+      Influx of patients from Sector 4. Symptoms: aggression, paranoia, hallucinations. Possible drug or chemical exposure. Running tests. Notified Overseer. Requesting additional medical staff.
+    options:
+      - text: "> RETURN TO MEDICAL LOGS"
+        target: medical_logs
+
+  log_3:
+    content: |
+      MEDICAL LOG - ENTRY 3
+      ---------------------
+      Test results inconclusive. Patients not responding to treatment. Condition worsening. Isolation necessary to prevent spread. Overseer's orders: keep this quiet. Something strange in the blood samples...
+    options:
+      - text: "> RETURN TO MEDICAL LOGS"
+        target: medical_logs
+
+  research_data:
+    content: |
+      RESEARCH DATA
+      -------------
+      > PROJECT GENESIS
+      > EXPERIMENT LOGS
+      > SUBJECT LIST
+    options:
+      - text: "> PROJECT GENESIS"
+        target: project_genesis
+      - text: "> EXPERIMENT LOGS"
+        target: experiment_logs
+      - text: "> SUBJECT LIST"
+        target: subject_list
+      - text: "> BACK"
+        target: start
+
+  project_genesis:
+    content: |
+      PROJECT GENESIS
+      ---------------
+      Classified Information
+      Access Restricted
+      Authorization Required
+    options:
+      - text: "> RETURN TO RESEARCH DATA"
+        target: research_data
+
+  experiment_logs:
+    content: |
+      EXPERIMENT LOGS
+      ---------------
+      > LOG 1: INITIAL OBSERVATIONS
+      > LOG 2: INTERMEDIATE RESULTS
+      > LOG 3: CRITICAL FINDINGS
+    options:
+      - text: "> LOG 1: INITIAL OBSERVATIONS"
+        target: experiment_log_1
+      - text: "> LOG 2: INTERMEDIATE RESULTS"
+        target: experiment_log_2
+      - text: "> LOG 3: CRITICAL FINDINGS"
+        target: experiment_log_3
+      - text: "> RETURN TO RESEARCH DATA"
+        target: research_data
+
+  experiment_log_1:
+    content: |
+      EXPERIMENT LOG 1 - INITIAL OBSERVATIONS
+      ---------------------------------------
+      Early stages of Project Genesis show promise. Subjects exhibit heightened physical and mental capabilities. Monitoring for side effects. Preliminary results suggest success, but long-term effects unknown.
+    options:
+      - text: "> RETURN TO EXPERIMENT LOGS"
+        target: experiment_logs
+
+  experiment_log_2:
+    content: |
+      EXPERIMENT LOG 2 - INTERMEDIATE RESULTS
+      ---------------------------------------
+      Subject health declining. Increased aggression and paranoia noted. Hallucinations becoming common. Medical team investigating potential causes. Project Genesis may need reevaluation.
+    options:
+      - text: "> RETURN TO EXPERIMENT LOGS"
+        target: experiment_logs
+
+  experiment_log_3:
+    content: |
+      EXPERIMENT LOG 3 - CRITICAL FINDINGS
+      ------------------------------------
+      Catastrophic failure. Subjects undergoing unpredictable mutations. Physical and mental degeneration observed. Immediate termination of Project Genesis recommended. All data to be classified.
+    options:
+      - text: "> RETURN TO EXPERIMENT LOGS"
+        target: experiment_logs
+
+  subject_list:
+    content: |
+      SUBJECT LIST
+      ------------
+      > SUBJECT 1: A. GREEN
+      > SUBJECT 2: B. WHITE
+      > SUBJECT 3: C. BLACK
+    options:
+      - text: "> SUBJECT 1: A. GREEN"
+        target: subject_1
+      - text: "> SUBJECT 2: B. WHITE"
+        target: subject_2
+      - text: "> SUBJECT 3: C. BLACK"
+        target: subject_3
+      - text: "> RETURN TO RESEARCH DATA"
+        target: research_data
+
+  subject_1:
+    content: |
+      SUBJECT 1: A. GREEN
+      -------------------
+      - Status: Deceased
+      - Notes: Subject exhibited high aggression and severe paranoia. Physical mutations included abnormal growths and muscle hypertrophy. Terminated for safety.
+    options:
+      - text: "> RETURN TO SUBJECT LIST"
+        target: subject_list
+
+  subject_2:
+    content: |
+      SUBJECT 2: B. WHITE
+      -------------------
+      - Status: Critical
+      - Notes: Subject displays extreme cognitive decline and erratic behavior. Physical changes include skin discoloration and limb elongation. Under continuous observation.
+    options:
+      - text: "> RETURN TO SUBJECT LIST"
+        target: subject_list
+
+  subject_3:
+    content: |
+      SUBJECT 3: C. BLACK
+      -------------------
+      - Status: Missing
+      - Notes: Subject escaped containment. Last seen exhibiting advanced stages of mutation. Considered highly dangerous. Search and recovery ongoing.
+    options:
+      - text: "> RETURN TO SUBJECT LIST"
+        target: subject_list

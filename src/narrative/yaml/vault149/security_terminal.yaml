@@ -1,0 +1,160 @@
+nodes:
+  start:
+    content: |
+      VAULT-TEC SECURITY TERMINAL
+      --------------------------
+      > ACCESS SECURITY LOGS
+      > VIEW INCIDENT REPORTS
+      > EMERGENCY PROTOCOLS
+    options:
+      - text: "> ACCESS SECURITY LOGS"
+        target: security_logs
+      - text: "> VIEW INCIDENT REPORTS"
+        target: incident_reports
+      - text: "> EMERGENCY PROTOCOLS"
+        target: emergency_protocols
+
+  security_logs:
+    content: |
+      SECURITY LOGS
+      -------------
+      > LOG ENTRY 1
+      > LOG ENTRY 2
+      > LOG ENTRY 3
+    options:
+      - text: "> LOG ENTRY 1"
+        target: log_1
+      - text: "> LOG ENTRY 2"
+        target: log_2
+      - text: "> LOG ENTRY 3"
+        target: log_3
+
+  log_1:
+    content: |
+      SECURITY LOG - ENTRY 1
+      ----------------------
+      Vault sealed. All residents accounted for. No signs of outside contamination. Routine patrols established. Armory secured. Overseer's orders: maintain strict control and report any suspicious activity.
+    options:
+      - text: "> RETURN TO SECURITY LOGS"
+        target: security_logs
+
+  log_2:
+    content: |
+      SECURITY LOG - ENTRY 2
+      ----------------------
+      Unusual activity reported in Sector 4. Residents displaying erratic behavior. Possible exposure to unknown substance. Quarantine measures implemented. Awaiting further instructions from Overseer.
+    options:
+      - text: "> RETURN TO SECURITY LOGS"
+        target: security_logs
+
+  log_3:
+    content: |
+      SECURITY LOG - ENTRY 3
+      ----------------------
+      Outbreak contained. Affected residents isolated. Cause unknown. Overseer ordered lockdown of Sector 4. Increased patrols. Authorized use of force if necessary. Something's not right here...
+    options:
+      - text: "> RETURN TO SECURITY LOGS"
+        target: security_logs
+
+  incident_reports:
+    content: |
+      INCIDENT REPORTS
+      ----------------
+      > REPORT 1: ALTERCATION IN CAFETERIA
+      > REPORT 2: VANDALISM IN RESIDENTIAL AREA
+      > REPORT 3: UNAUTHORIZED ACCESS TO RESTRICTED AREA
+    options:
+      - text: "> REPORT 1: ALTERCATION IN CAFETERIA"
+        target: report_1
+      - text: "> REPORT 2: VANDALISM IN RESIDENTIAL AREA"
+        target: report_2
+      - text: "> REPORT 3: UNAUTHORIZED ACCESS TO RESTRICTED AREA"
+        target: report_3
+      - text: "> RETURN TO MAIN MENU"
+        target: start
+
+  report_1:
+    content: |
+      INCIDENT REPORT 1
+      -----------------
+      Location: Cafeteria
+      Details: A physical altercation broke out between two residents over meal portions. Security intervened, and both individuals were escorted to the holding area. Incident logged for further review.
+    options:
+      - text: "> RETURN TO INCIDENT REPORTS"
+        target: incident_reports
+
+  report_2:
+    content: |
+      INCIDENT REPORT 2
+      -----------------
+      Location: Residential Area
+      Details: Vandals defaced walls with unauthorized graffiti. Security is reviewing surveillance footage to identify perpetrators. Maintenance team has been dispatched for cleanup.
+    options:
+      - text: "> RETURN TO INCIDENT REPORTS"
+        target: incident_reports
+
+  report_3:
+    content: |
+      INCIDENT REPORT 3
+      -----------------
+      Location: Restricted Area
+      Details: An unidentified individual attempted to access a restricted area without proper authorization. Security apprehended the intruder. Undergoing interrogation for further information.
+    options:
+      - text: "> RETURN TO INCIDENT REPORTS"
+        target: incident_reports
+
+  emergency_protocols:
+    content: |
+      EMERGENCY PROTOCOLS
+      -------------------
+      > LOCKDOWN PROCEDURES
+      > QUARANTINE MEASURES
+      > EVACUATION PLAN
+    options:
+      - text: "> LOCKDOWN PROCEDURES"
+        target: lockdown_procedures
+      - text: "> QUARANTINE MEASURES"
+        target: quarantine_measures
+      - text: "> EVACUATION PLAN"
+        target: evacuation_plan
+      - text: "> RETURN TO MAIN MENU"
+        target: start
+
+  lockdown_procedures:
+    content: |
+      LOCKDOWN PROCEDURES
+      -------------------
+      1. Secure all entry and exit points.
+      2. Initiate security lockdown protocol from the main terminal.
+      3. Notify all residents of lockdown status via PA system.
+      4. Increase security patrols in high-risk areas.
+      5. Monitor for further instructions from the Overseer.
+    options:
+      - text: "> RETURN TO EMERGENCY PROTOCOLS"
+        target: emergency_protocols
+
+  quarantine_measures:
+    content: |
+      QUARANTINE MEASURES
+      -------------------
+      1. Isolate affected individuals in designated quarantine zones.
+      2. Implement medical screening for all residents.
+      3. Restrict movement within the vault to prevent cross-contamination.
+      4. Provide affected areas with necessary medical supplies and staff.
+      5. Monitor and report status to the Overseer regularly.
+    options:
+      - text: "> RETURN TO EMERGENCY PROTOCOLS"
+        target: emergency_protocols
+
+  evacuation_plan:
+    content: |
+      EVACUATION PLAN
+      ---------------
+      1. Announce evacuation via the PA system.
+      2. Guide residents to designated evacuation routes.
+      3. Ensure all residents have necessary supplies and identification.
+      4. Maintain order and control during the evacuation process.
+      5. Report to external contacts for assistance if needed.
+    options:
+      - text: "> RETURN TO EMERGENCY PROTOCOLS"
+        target: emergency_protocols
