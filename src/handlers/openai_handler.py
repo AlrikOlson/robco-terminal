@@ -56,7 +56,7 @@ characters_data = None
 def load_characters_data():
     if not characters_data:
         file_loader = FileLoader()
-        return file_loader.load_yaml(f"src/handlers/ai_personalities/{CONTEXT_FOLDER}/characters.yaml")
+        return file_loader.load_yaml(f"handlers/ai_personalities/{CONTEXT_FOLDER}/characters.yaml")
     return characters_data
 
 
@@ -755,7 +755,7 @@ def generate_response_helper(
 
 def get_setting_and_background():
     file_loader = FileLoader()
-    setting_data = file_loader.load_yaml(f"src/handlers/ai_personalities/{CONTEXT_FOLDER}/setting.yaml")
+    setting_data = file_loader.load_yaml(f"handlers/ai_personalities/{CONTEXT_FOLDER}/setting.yaml")
     background = setting_data["background"]
     setting = setting_data["setting"]
     return f"Background: {background}\n\nSetting: {setting}"

@@ -35,6 +35,6 @@ class SceneFactory:
     @staticmethod
     def _load_chapter(yaml_file):
         file_loader = FileLoader()
-        yaml_content = file_loader.load_text(f'src/narrative/yaml/{yaml_file}')
+        yaml_content = file_loader.load_text(f'narrative/yaml/{yaml_file}')
         return NarrativeChapter(yaml_content)
 

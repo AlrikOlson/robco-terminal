@@ -9,7 +9,7 @@ class FileLoader:
             self.base_path = sys._MEIPASS
         else:
             # Running from source code
-            self.base_path = os.path.abspath(".")
+            self.base_path = os.path.join(os.path.abspath("."), 'src')
 
     def get_path(self, relative_path):
         return os.path.join(self.base_path, relative_path)
