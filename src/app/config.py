@@ -7,7 +7,6 @@ class Config:
         self.font_path = file_loader.get_path("assets/fonts/Perfect DOS VGA 437 Win.ttf")
         self.screen_width = 800
         self.screen_height = 600
-        self.font_path = "assets/fonts/Perfect DOS VGA 437 Win.ttf"
         self.font_size = 20
         self.initial_scene = 'login_scene'
         self.password = "password123"

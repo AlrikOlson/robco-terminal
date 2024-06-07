@@ -90,15 +90,6 @@ class TextRenderer:
         self.is_active_rendering = True
         self.update()
 
-    def change_font(self, font):
-        """
-        Changes the font used for rendering.
-
-        Args:
-            font: New font to be used.
-        """
-        self.font = font
-
     def is_rendering(self):
         """
         Checks if the text is still being rendered.

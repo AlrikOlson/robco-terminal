@@ -5,9 +5,8 @@ import random
 import time  # Import time for calculating elapsed time
 
 class Application:
-    def __init__(self, screen, font_loader, text_renderer, input_handler, config):
+    def __init__(self, screen, text_renderer, input_handler, config):
         self.screen = screen
-        self.font_loader = font_loader
         self.text_renderer = text_renderer
         self.input_handler = input_handler
         self.config = config
@@ -40,8 +39,6 @@ class Application:
 
     def _initialize(self):
         self.screen.initialize()
-        font = self.font_loader.load()
-        self.text_renderer.change_font(font)
         self.set_scene(self.config.initial_scene)
 
     def set_scene(self, scene_name):

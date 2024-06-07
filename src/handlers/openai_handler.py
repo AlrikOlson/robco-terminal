@@ -56,8 +56,9 @@ characters_data = None
 def load_characters_data():
     if not characters_data:
         file_loader = FileLoader()
-        return file_loader.load_yaml(f"handlers/ai_personalities/{CONTEXT_FOLDER}/characters.yaml")
-    return characters_data
+        temp_characters_data = file_loader.load_yaml(f"handlers/ai_personalities/{CONTEXT_FOLDER}/characters.yaml")
+        return temp_characters_data['characters']
+    return characters_data['characters']
 
 
 def log_llm_interaction(provider, endpoint, request_data, response_data):

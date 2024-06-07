@@ -39,7 +39,7 @@ def main():
         text_renderer = TextRendererFactory.create_text_renderer(screen, font)
         input_handler = InputHandlerFactory.create_input_handler()
 
-        app = Application(screen, font_loader, text_renderer, input_handler, config)
+        app = Application(screen, text_renderer, input_handler, config)
         app.run()
 
         pygame.quit()
@@ -49,6 +49,7 @@ def main():
         show_error_dialog(error_message)
         
         pygame.quit()
+        raise e
 
 if __name__ == "__main__":
     main()
