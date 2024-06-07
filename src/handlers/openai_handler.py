@@ -43,9 +43,6 @@ except (openai.OpenAIError, anthropic.APIError, openai.OpenAIError):
 
 CONTEXT_FOLDER = os.getenv("CONTEXT_FOLDER", "support")
 
-file_loader = FileLoader()
-characters_data = file_loader.load_yaml(f"src/handlers/ai_personalities/{CONTEXT_FOLDER}/characters.yaml")["characters"]
-
 OLLAMA_LLAMA3_API_URL = os.getenv("OLLAMA_LLAMA3_API_URL", "http://localhost:8000")
 RESPONSE_PROVIDER = os.getenv("RESPONSE_PROVIDER", "anthropic")
 TRACK_EVENTS_PROVIDER = os.getenv("TRACK_EVENTS_PROVIDER", "anthropic")
@@ -53,6 +50,14 @@ UPDATE_STATE_TRACKER_PROVIDER = os.getenv("UPDATE_STATE_TRACKER_PROVIDER", "anth
 UPDATE_MINDSET_PARAMETERS_PROVIDER = os.getenv(
     "UPDATE_MINDSET_PARAMETERS_PROVIDER", "anthropic"
 )
+
+characters_data = None
+
+def load_characters_data():
+    if not characters_data:
+        file_loader = FileLoader()
+        return file_loader.load_yaml(f"src/handlers/ai_personalities/{CONTEXT_FOLDER}/characters.yaml")
+    return characters_data
 
 
 def log_llm_interaction(provider, endpoint, request_data, response_data):
@@ -130,7 +135,7 @@ class EventTracker:
 
 
 def get_characters_in_conversation(conversation_history):
-    character_names = list(characters_data.keys())
+    character_names = list(load_characters_data().keys())
     involved_characters = set()
     for msg in conversation_history:
         role = msg["role"]
@@ -200,7 +205,7 @@ class Character(ABC):
 
 def get_character_by_name(name):
     normalized_name = normalize_name(name)
-    character_names = list(characters_data.keys())
+    character_names = list(load_characters_data().keys())
     normalized_character_names = [normalize_name(c_name) for c_name in character_names]
 
     # Find the closest match to the normalized name
@@ -209,7 +214,7 @@ def get_character_by_name(name):
     # Map back to the original names
     original_name = character_names[normalized_character_names.index(closest_match)]
 
-    return Character(original_name, characters_data[original_name])
+    return Character(original_name, load_characters_data()[original_name])
 
 
 def adjust_mindset_helper(
@@ -360,7 +365,7 @@ def update_mindset_parameters(character, conversation_analysis, state_tracker):
 
 
 def update_state_tracker(character, conversation_analysis, state_tracker):
-    character_names = list(characters_data.keys())
+    character_names = list(load_characters_data().keys())
     normalized_character_names = [normalize_name(c_name) for c_name in character_names]
 
     tools_builder = ToolsBuilder()
@@ -776,7 +781,7 @@ def generate_character_response(
         conversation_analysis, state_tracker, event_tracker
     )
 
-    all_characters = [get_character_by_name(name) for name in characters_data.keys()]
+    all_characters = [get_character_by_name(name) for name in load_characters_data().keys()]
 
     character_response = selected_character.generate_response(
         conversation_history,

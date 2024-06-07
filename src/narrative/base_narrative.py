@@ -8,7 +8,7 @@ from src.handlers.openai_handler import (
     generate_character_response,
     get_character_by_name,
     normalize_name,
-    characters_data,
+    load_characters_data,
     EventTracker,
 )
 
@@ -21,7 +21,7 @@ class BaseNarrative(ABC):
         self.conversational_mode = False
         self.conversation_histories = {}  # Initialize conversation histories
 
-        characters = list(characters_data.keys())
+        characters = list(load_characters_data().keys())
         self.state_tracker = {
             character: {
                 "location": "initial",
@@ -37,7 +37,7 @@ class BaseNarrative(ABC):
         self.event_tracker = EventTracker()
 
     def initialize_conversation_histories(self):
-        characters = list(characters_data.keys())
+        characters = list(load_characters_data().keys())
         for character in characters:
             self.conversation_histories[character] = []
 
