@@ -5,6 +5,17 @@ on:
     tags:
       - 'v*'
 
+permissions: 
+  contents: write
+  actions: read
+  checks: read
+  deployments: read
+  issues: read
+  packages: read
+  pull-requests: read
+  repository-projects: read
+  statuses: read
+
 jobs:
   release:
     runs-on: windows-latest
@@ -43,8 +54,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
+        tag_name: ${{ github.ref_name }}
+        release_name: Release ${{ github.ref_name }}
         draft: false
         prerelease: false
 
