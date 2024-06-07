@@ -5,7 +5,7 @@ on:
     tags:
       - 'v*'
 
-permissions: 
+permissions:
   contents: write
   actions: read
   checks: read
@@ -40,13 +40,29 @@ jobs:
         # Run your test suite here
         # For example: python -m unittest discover tests/
 
-    - name: Install cx_Freeze
+    - name: Install PyInstaller
       run: |
-        pip install cx_Freeze
+        pip install pyinstaller
 
     - name: Build Windows executable
       run: |
-        python setup.py build
+        pyinstaller --onefile --name=robco-terminal src/app/main.py
+
+    - name: Install Windows SDK
+      uses: microsoft/setup-msbuild@v1.1
+
+    - name: Create certificate file
+      env:
+        CERTIFICATE_BASE64: ${{ secrets.CERTIFICATE_BASE64 }}
+        CERTIFICATE_PASSWORD: ${{ secrets.CERTIFICATE_PASSWORD }}
+      run: |
+        $bytes = [Convert]::FromBase64String($env:CERTIFICATE_BASE64)
+        [IO.File]::WriteAllBytes("certificate.pfx", $bytes)
+        echo "CERTIFICATE_PASSWORD=$env:CERTIFICATE_PASSWORD" >> $env:GITHUB_ENV
+
+    - name: Sign executable
+      run: |
+        & 'C:\Program Files (x86)\Windows Kits\10\bin\10.0.22000.0\x64\signtool.exe' sign /f certificate.pfx /p ${{ env.CERTIFICATE_PASSWORD }} /fd SHA256 /tr http://timestamp.digicert.com /td SHA256 ./dist/robco-terminal.exe
 
     - name: Create Release
       id: create_release
@@ -60,12 +76,12 @@ jobs:
         prerelease: false
 
     - name: Upload Release Asset
-      id: upload-release-asset 
+      id: upload-release-asset
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./build/exe.win-amd64-3.x/robco-terminal.exe
+        asset_path: ./dist/robco-terminal.exe
         asset_name: robco-terminal.exe
         asset_content_type: application/vnd.microsoft.portable-executable
