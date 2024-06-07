@@ -39,8 +39,8 @@ except (openai.OpenAIError, anthropic.APIError, openai.OpenAIError):
     client_openai = None
     client_anthropic = None
     client_nvidia = None
-    
-CONTEXT_FOLDER = os.getenv("CONTEXT_FOLDER")
+
+CONTEXT_FOLDER = os.getenv("CONTEXT_FOLDER", "support")
 
 with open(
     f"src/handlers/ai_personalities/{CONTEXT_FOLDER}/characters.yaml", "r"
