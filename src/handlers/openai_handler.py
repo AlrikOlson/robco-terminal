@@ -29,11 +29,17 @@ NVIDIA_LLAMA3_70B_API_URL = os.getenv(
     "NVIDIA_LLAMA3_70B_API_URL", "https://integrate.api.nvidia.com/v1"
 )
 
-client_openai = OpenAIClient(openai.OpenAI())
-client_anthropic = AnthropicClient(anthropic.Anthropic(api_key=anthropic_api_key))
-client_nvidia = NVIDIAClient(
-    openai.OpenAI(base_url=NVIDIA_LLAMA3_70B_API_URL, api_key=nvidia_api_key)
-)
+try:
+    client_openai = OpenAIClient(openai.OpenAI())
+    client_anthropic = AnthropicClient(anthropic.Anthropic(api_key=anthropic_api_key))
+    client_nvidia = NVIDIAClient(
+        openai.OpenAI(base_url=NVIDIA_LLAMA3_70B_API_URL, api_key=nvidia_api_key)
+    )
+except (openai.OpenAIError, anthropic.APIError, openai.OpenAIError):
+    client_openai = None
+    client_anthropic = None
+    client_nvidia = None
+    
 CONTEXT_FOLDER = os.getenv("CONTEXT_FOLDER")
 
 with open(

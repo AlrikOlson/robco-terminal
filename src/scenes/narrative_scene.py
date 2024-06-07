@@ -1,4 +1,5 @@
 # narrative_scene.py
+import os
 import pygame
 from src.app.constants import GREEN
 from src.scenes.menu_scene import MenuScene
@@ -9,6 +10,13 @@ class NarrativeScene(MenuScene, TextScene):
         MenuScene.__init__(self, app, chapter.get_options())
         TextScene.__init__(self, app)
         self.chapter = chapter
+
+        # Check if API keys are set
+        self.api_keys_set = (
+            os.getenv("OPENAI_API_KEY") is not None and
+            os.getenv("ANTHROPIC_API_KEY") is not None and
+            os.getenv("NVIDIA_API_KEY") is not None
+        )
 
     def enter(self):
         self.chapter.load_content()
@@ -51,11 +59,14 @@ class NarrativeScene(MenuScene, TextScene):
                 self.chapter.conversation_histories.clear()  # Clear conversation history
             self.app.set_scene('success_scene')
         else:
-            self.chapter.process_selection(selected_option)
-            self.menu_options = self.chapter.get_options()
-            self.app.text_renderer.set_text(self.chapter.get_text())
-            self.app.is_rendering = True
-            self.selected_option = 0
+            if selected_option.get("conversational", False) and not self.api_keys_set:
+                self.app.text_renderer.append_text("Conversational mode is disabled due to missing API keys.")
+            else:
+                self.chapter.process_selection(selected_option)
+                self.menu_options = self.chapter.get_options()
+                self.app.text_renderer.set_text(self.chapter.get_text())
+                self.app.is_rendering = True
+                self.selected_option = 0
 
     def _render_user_input(self):
         user_input = self.app.input_handler.get_user_input()
