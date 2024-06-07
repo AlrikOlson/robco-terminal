@@ -7,6 +7,7 @@ import anthropic
 import logging
 from fuzzywuzzy import process
 from abc import ABC, abstractmethod
+from src.assets.file_loader import FileLoader
 from src.handlers.ai_tools.tools_builder import ToolsBuilder
 from src.handlers.ai_tools.tools_clients import (
     OpenAIClient,
@@ -42,10 +43,8 @@ except (openai.OpenAIError, anthropic.APIError, openai.OpenAIError):
 
 CONTEXT_FOLDER = os.getenv("CONTEXT_FOLDER", "support")
 
-with open(
-    f"src/handlers/ai_personalities/{CONTEXT_FOLDER}/characters.yaml", "r"
-) as file:
-    characters_data = yaml.safe_load(file)["characters"]
+file_loader = FileLoader()
+characters_data = file_loader.load_yaml(f"src/handlers/ai_personalities/{CONTEXT_FOLDER}/characters.yaml")["characters"]
 
 OLLAMA_LLAMA3_API_URL = os.getenv("OLLAMA_LLAMA3_API_URL", "http://localhost:8000")
 RESPONSE_PROVIDER = os.getenv("RESPONSE_PROVIDER", "anthropic")
@@ -750,14 +749,11 @@ def generate_response_helper(
 
 
 def get_setting_and_background():
-    with open(
-        f"src/handlers/ai_personalities/{CONTEXT_FOLDER}/setting.yaml", "r"
-    ) as file:
-        setting_data = yaml.safe_load(file)
-        background = setting_data["background"]
-        setting = setting_data["setting"]
-        return f"Background: {background}\n\nSetting: {setting}"
-
+    file_loader = FileLoader()
+    setting_data = file_loader.load_yaml(f"src/handlers/ai_personalities/{CONTEXT_FOLDER}/setting.yaml")
+    background = setting_data["background"]
+    setting = setting_data["setting"]
+    return f"Background: {background}\n\nSetting: {setting}"
 
 def normalize_name(name):
     return name.replace(" ", "_").lower()

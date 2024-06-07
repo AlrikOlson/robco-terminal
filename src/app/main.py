@@ -3,9 +3,13 @@ from dotenv import load_dotenv
 from src.app.application import Application
 from src.app.factories import ScreenFactory, FontLoaderFactory, TextRendererFactory, InputHandlerFactory
 from src.app.config import Config
+from src.assets.file_loader import FileLoader
 
 def main():
-    load_dotenv()
+    file_loader = FileLoader()
+    dotenv_path = file_loader.get_path('.env')
+    load_dotenv(dotenv_path)
+
     pygame.init()
 
     config = Config()

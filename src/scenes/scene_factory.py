@@ -1,3 +1,4 @@
+from src.assets.file_loader import FileLoader
 from src.scenes.bootup_scene import BootupScene
 from src.scenes.login_scene import LoginScene
 from src.scenes.success_scene import SuccessScene
@@ -33,6 +34,7 @@ class SceneFactory:
 
     @staticmethod
     def _load_chapter(yaml_file):
-        with open(f'src/narrative/yaml/{yaml_file}', 'r') as file:
-            yaml_content = file.read()
+        file_loader = FileLoader()
+        yaml_content = file_loader.load_text(f'src/narrative/yaml/{yaml_file}')
         return NarrativeChapter(yaml_content)
+
