@@ -3,9 +3,6 @@ nodes:
     content: |
       VAULT-TEC SECURITY TERMINAL
       --------------------------
-      > ACCESS SECURITY LOGS
-      > VIEW INCIDENT REPORTS
-      > EMERGENCY PROTOCOLS
     options:
       - text: "> ACCESS SECURITY LOGS"
         target: security_logs
@@ -18,9 +15,6 @@ nodes:
     content: |
       SECURITY LOGS
       -------------
-      > LOG ENTRY 1
-      > LOG ENTRY 2
-      > LOG ENTRY 3
     options:
       - text: "> LOG ENTRY 1"
         target: log_1
@@ -28,6 +22,8 @@ nodes:
         target: log_2
       - text: "> LOG ENTRY 3"
         target: log_3
+      - text: "> BACK"
+        target: start
 
   log_1:
     content: |
@@ -64,13 +60,13 @@ nodes:
       > REPORT 2: VANDALISM IN RESIDENTIAL AREA
       > REPORT 3: UNAUTHORIZED ACCESS TO RESTRICTED AREA
     options:
-      - text: "> REPORT 1: ALTERCATION IN CAFETERIA"
+      - text: "> REPORT 1"
         target: report_1
-      - text: "> REPORT 2: VANDALISM IN RESIDENTIAL AREA"
+      - text: "> REPORT 2"
         target: report_2
-      - text: "> REPORT 3: UNAUTHORIZED ACCESS TO RESTRICTED AREA"
+      - text: "> REPORT 3"
         target: report_3
-      - text: "> RETURN TO MAIN MENU"
+      - text: "> BACK"
         target: start
 
   report_1:
@@ -107,9 +103,6 @@ nodes:
     content: |
       EMERGENCY PROTOCOLS
       -------------------
-      > LOCKDOWN PROCEDURES
-      > QUARANTINE MEASURES
-      > EVACUATION PLAN
     options:
       - text: "> LOCKDOWN PROCEDURES"
         target: lockdown_procedures
@@ -117,7 +110,7 @@ nodes:
         target: quarantine_measures
       - text: "> EVACUATION PLAN"
         target: evacuation_plan
-      - text: "> RETURN TO MAIN MENU"
+      - text: "> BACK"
         target: start
 
   lockdown_procedures:

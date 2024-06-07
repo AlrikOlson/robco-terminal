@@ -17,7 +17,7 @@ nodes:
         target: ai_support
       - text: "> INITIATE VAULT-TEC AI HR REPRESENTATIVE COMMUNICATION"
         target: hr_support
-      - text: "> RETURN TO MAIN MENU"
+      - text: "> BACK"
         target: start
 
   ai_support:

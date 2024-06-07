@@ -9,8 +9,8 @@ class NarrativeChapter(BaseNarrative):
     def get_options(self):
         if not self.conversational_mode:
             options = super().get_options()
-            if "RETURN TO MAIN MENU" not in options and "BACK TO LOG" not in options:
-                options.append("[Exit]")
+            #if "RETURN TO MAIN MENU" not in options and "BACK TO LOG" not in options:
+            options.append("[Exit]")
             return options
         else:
             return []

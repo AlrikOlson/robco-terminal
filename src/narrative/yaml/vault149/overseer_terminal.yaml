@@ -3,9 +3,6 @@ nodes:
     content: |
       OVERSEER'S TERMINAL
       -------------------
-      > VIEW PERSONAL LOGS
-      > ACCESS VAULT SYSTEMS
-      > COMMUNICATIONS
     options:
       - text: "> VIEW PERSONAL LOGS"
         target: personal_logs
@@ -18,9 +15,6 @@ nodes:
     content: |
       PERSONAL LOGS
       -------------
-      > LOG ENTRY 1
-      > LOG ENTRY 2
-      > LOG ENTRY 3
     options:
       - text: "> LOG ENTRY 1"
         target: log_1
@@ -28,6 +22,8 @@ nodes:
         target: log_2
       - text: "> LOG ENTRY 3"
         target: log_3
+      - text: "> BACK"
+        target: start
 
   log_1:
     content: |
@@ -60,9 +56,6 @@ nodes:
     content: |
       VAULT SYSTEMS
       -------------
-      > LIFE SUPPORT
-      > SECURITY
-      > POWER MANAGEMENT
     options:
       - text: "> LIFE SUPPORT"
         target: life_support
@@ -70,7 +63,7 @@ nodes:
         target: security
       - text: "> POWER MANAGEMENT"
         target: power_management
-      - text: "> RETURN TO MAIN MENU"
+      - text: "> BACK"
         target: start
 
   life_support:
@@ -113,9 +106,6 @@ nodes:
     content: |
       COMMUNICATIONS
       --------------
-      > VAULT-TEC HQ
-      > EMERGENCY BROADCAST
-      > EXTERNAL CONTACTS
     options:
       - text: "> VAULT-TEC HQ"
         target: vault_tec_hq
@@ -123,7 +113,7 @@ nodes:
         target: emergency_broadcast
       - text: "> EXTERNAL CONTACTS"
         target: external_contacts
-      - text: "> RETURN TO MAIN MENU"
+      - text: "> BACK"
         target: start
 
   vault_tec_hq:

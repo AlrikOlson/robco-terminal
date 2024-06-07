@@ -59,7 +59,8 @@ class NarrativeScene(MenuScene, TextScene):
                 self.chapter.conversation_histories.clear()  # Clear conversation history
             self.app.set_scene('success_scene')
         else:
-            if selected_option.get("conversational", False) and not self.api_keys_set:
+            option_data = next((option for option in self.chapter.nodes[self.chapter.current_node]["options"] if option["text"] == selected_option), None)
+            if option_data and option_data.get("conversational", False) and not self.api_keys_set:
                 self.app.text_renderer.append_text("Conversational mode is disabled due to missing API keys.")
             else:
                 self.chapter.process_selection(selected_option)

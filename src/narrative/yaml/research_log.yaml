@@ -3,11 +3,6 @@ nodes:
     content: |
       VAULT-TEC RESEARCH LOG - DR. MORLEY
       -----------------------------------
-      > ACCESS ENTRY 1
-      > ACCESS ENTRY 2
-      > ACCESS ENTRY 3
-      > ACCESS ENTRY 4
-      > VIEW EXPERIMENT PROTOCOL
     options:
       - text: "> ACCESS ENTRY 1"
         target: entry_1

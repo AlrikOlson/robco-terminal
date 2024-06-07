@@ -3,10 +3,6 @@ nodes:
     content: |
       VAULT OVERSEER'S LOG
       --------------------
-      > ACCESS ENTRY 1
-      > ACCESS ENTRY 2
-      > ACCESS ENTRY 3
-      > ACCESS ENTRY 4
     options:
       - text: "> ACCESS ENTRY 1"
         target: entry_1
