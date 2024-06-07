@@ -2,7 +2,6 @@ from src.rendering.opengl_initializer import OpenGLInitializer
 from src.rendering.renderer import Renderer
 from src.rendering.shader_factory import ShaderFactory
 from src.rendering.texture_manager import TextureManager
-from src.rendering.crt_effect import CRTEffect
 
 
 import pygame
@@ -29,7 +28,6 @@ class TerminalScreen:
         self.overlay = None
         self.curvature_shader = None
         self.opengl_init = OpenGLInitializer()
-        self.crt_effect = CRTEffect(self.width, self.height)
 
     def initialize(self):
         """
@@ -43,7 +41,9 @@ class TerminalScreen:
         """
         Displays the screen with CRT effects applied and renders it.
         """
-        surface = pygame.Surface((self.overlay.get_width(), self.overlay.get_height()), pygame.SRCALPHA)
+        surface = pygame.Surface(
+            (self.overlay.get_width(), self.overlay.get_height()), pygame.SRCALPHA
+        )
         self.overlay.blit(surface, (0, 0))
         texture_id = TextureManager.create_texture_id(self.overlay)
         TextureManager.bind_texture(texture_id, self.curvature_shader)
@@ -72,6 +72,8 @@ class TerminalScreen:
         Initializes Pygame and sets up the display window.
         """
         pygame.init()
-        self.screen = pygame.display.set_mode((self.width, self.height), pygame.OPENGL | pygame.DOUBLEBUF)
+        self.screen = pygame.display.set_mode(
+            (self.width, self.height), pygame.OPENGL | pygame.DOUBLEBUF
+        )
         pygame.display.set_caption("ROBCO Industries (TM) Termlink")
         self.overlay = pygame.Surface((self.width, self.height), pygame.SRCALPHA)
