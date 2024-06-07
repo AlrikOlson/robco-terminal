@@ -33,7 +33,7 @@ class CRTEffect:
         Args:
             overlay: The overlay surface.
         """
-        flicker_intensity = random.randint(0, 5)  # Reduced intensity range
+        #flicker_intensity = random.randint(0, 1)  # Reduced intensity range
         flicker_surface = pygame.Surface((overlay.get_width(), overlay.get_height()), pygame.SRCALPHA)
-        flicker_surface.fill((0, 255, 0, flicker_intensity))  # Fill with green color
+        #flicker_surface.fill((0, 255, 0, flicker_intensity))  # Fill with green color
         overlay.blit(flicker_surface, (0, 0))

@@ -5,12 +5,6 @@ class ShaderFactory:
 
     @staticmethod
     def create_curvature_shader():
-        """
-        Creates and compiles the curvature shader for CRT effect.
-
-        Returns:
-            shader_program: The compiled shader program.
-        """
         vertex_shader = """
         #version 460 core
         in vec2 in_position;
@@ -29,11 +23,17 @@ class ShaderFactory:
         in vec2 fragTexCoord;
         out vec4 fragColor;
         uniform sampler2D textureSampler;
+        uniform float Frame;
         uniform float Time;
         uniform float Scale;
         uniform vec2 Resolution;
         uniform vec4 Background;
         uniform vec3 BacklightColor;
+
+        // Ray-tracing like defines
+        #define MAX_RAY_STEPS 200
+        #define SURFACE_DIST_THRESHOLD 0.1
+        #define MAX_DISTANCE 100.0
 
         #define ENABLE_CURVE 1
         #define ENABLE_OVERSCAN 1
@@ -45,7 +45,7 @@ class ShaderFactory:
         #define ENABLE_SCANLINES 1
         #define ENABLE_TINT 1
         #define ENABLE_GRAIN 1
-        #define ENABLE_BACKLIGHT 1
+        #define ENABLE_BACKLIGHT 0
 
         #define CURVE_INTENSITY 1
         #define OVERSCAN_PERCENTAGE 0.02
@@ -196,8 +196,12 @@ class ShaderFactory:
         vec3 refreshLines(vec3 color, vec2 uv) {
             float timeOver = fract(Time / 5.0) * 1.5 - 0.5;
             float refreshLineColorTint = timeOver - uv.y;
-            if (uv.y > timeOver && uv.y - 0.03 < timeOver) {
-                color.rgb += refreshLineColorTint * 2.0;
+            float scanLineWidth = 0.03; // Adjust the width of the scan line
+            float gradientFactor = -3.0; // Adjust the gradient intensity
+            
+            if (uv.y > timeOver && uv.y - scanLineWidth < timeOver) {
+                float gradientIntensity = (timeOver - uv.y) / scanLineWidth;
+                color.rgb += refreshLineColorTint * gradientIntensity * gradientFactor;
             }
             return clamp01(color);
         }
@@ -243,7 +247,7 @@ class ShaderFactory:
         #define b1 -0.7607324991323768
 
         vec3 grain(vec3 color, vec2 uv) {
-            vec3 m = vec3(uv, fract(Time / 5.0)) + 1.0;
+            vec3 m = vec3(uv, fract((Time + Frame) / 5.0)) + 1.0; // Updated line
             float state = permute(permute(m.x) + m.y) + m.z;
             float p = 0.95 * rand(state) + 0.025;
             float q = p - 0.5;
@@ -253,6 +257,31 @@ class ShaderFactory:
             return clamp01(color);
         }
         #endif
+
+        float plane(vec3 p, vec3 n, float h) {
+            return dot(p, n) + h;
+        }
+
+        float map(vec3 p) {
+            vec4 textColor = texture(textureSampler, p.xy);
+            if (textColor.a < 0.5) return 1.0; // Consider alpha threshold
+            return plane(p, vec3(0.0, 1.0, 0.0), 0.0);
+        }
+
+        vec4 rayMarch(vec3 ro, vec3 rd) {
+            float t = 0.0;
+            for (int i = 0; i < MAX_RAY_STEPS; i++) {
+                vec3 pos = ro + t * rd;
+                float d = map(pos);
+                if (d < SURFACE_DIST_THRESHOLD) {
+                    vec4 textColor = texture(textureSampler, pos.xy);
+                    return textColor;
+                }
+                if (t > MAX_DISTANCE) break;
+                t += d;
+            }
+            return vec4(vec3(0.0), 1.0); // Background color (black) with alpha
+        }
 
         void main() {
             vec2 uv = fragTexCoord;
@@ -287,16 +316,22 @@ class ShaderFactory:
             }
             #endif
 
-            vec4 color = vec4(1.0, 0.0, 1.0, -1.0);
+            vec4 color = texture(textureSampler, uv);
+            if (color.a < 0.5) {
+                vec3 ray_origin = vec3(uv, -3.0);
+                vec3 ray_dir = normalize(vec3(0.0, 0.0, 1.0));
+                vec4 rayMarchedColor = rayMarch(ray_origin, ray_dir);
+                
+                // Blend the ray-marched color with the underlying texture
+                float blendFactor = 0.5; // Adjust this value to control the blending strength
+                color = mix(color, rayMarchedColor, blendFactor);
+            }
+
             vec2 screenuv = uv;
 
             #if ENABLE_OVERSCAN
             color = overscan(color, screenuv, uv);
             #endif
-
-            if (color.a < 0.0) {
-                color = texture(textureSampler, uv);
-            }
 
             #if ENABLE_BLOOM
             color.rgb = bloom(color.rgb, uv);
@@ -336,7 +371,6 @@ class ShaderFactory:
 
             fragColor = color;
         }
-
         """
 
         vertex_shader_compiled = shaders.compileShader(vertex_shader, gl.GL_VERTEX_SHADER)
@@ -345,6 +379,7 @@ class ShaderFactory:
 
         gl.glUseProgram(shader_program)
         # Set initial uniform values
+        gl.glUniform1f(gl.glGetUniformLocation(shader_program, "Frame"), 0.0)
         gl.glUniform1f(gl.glGetUniformLocation(shader_program, "Time"), 0.0)
         gl.glUniform1f(gl.glGetUniformLocation(shader_program, "Scale"), 1.0)
         gl.glUniform2f(gl.glGetUniformLocation(shader_program, "Resolution"), 800.0, 600.0)
@@ -352,3 +387,4 @@ class ShaderFactory:
         gl.glUniform3f(gl.glGetUniformLocation(shader_program, "BacklightColor"), 0.2, 0.2, 0.2)
 
         return shader_program
+

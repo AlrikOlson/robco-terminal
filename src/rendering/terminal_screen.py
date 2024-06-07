@@ -1,5 +1,3 @@
-
-from src.rendering.bezel_drawer import BezelDrawer
 from src.rendering.opengl_initializer import OpenGLInitializer
 from src.rendering.renderer import Renderer
 from src.rendering.shader_factory import ShaderFactory
@@ -41,15 +39,15 @@ class TerminalScreen:
         self.opengl_init.initialize()
         self.curvature_shader = ShaderFactory.create_curvature_shader()
 
-    def display(self):
+    def display(self, current_time):
         """
         Displays the screen with CRT effects applied and renders it.
         """
-        self.crt_effect.apply_effect(self.overlay)
+        surface = pygame.Surface((self.overlay.get_width(), self.overlay.get_height()), pygame.SRCALPHA)
+        self.overlay.blit(surface, (0, 0))
         texture_id = TextureManager.create_texture_id(self.overlay)
         TextureManager.bind_texture(texture_id, self.curvature_shader)
-        Renderer.render_texture(self.curvature_shader)
-        BezelDrawer.draw_bezel(self.width, self.curvature_shader)
+        Renderer.render_texture(self.curvature_shader, current_time)
         pygame.display.flip()
         TextureManager.cleanup(texture_id)
 

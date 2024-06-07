@@ -8,15 +8,21 @@ import ctypes
 class Renderer:
 
     @staticmethod
-    def render_texture(shader_program):
+    def render_texture(shader_program, time):
         """
         Renders the texture using OpenGL.
 
         Args:
             shader_program: The shader program.
+            time: The current time to pass to the shader.
         """
         gl.glClear(gl.GL_COLOR_BUFFER_BIT | gl.GL_DEPTH_BUFFER_BIT)
         gl.glUseProgram(shader_program)
+        
+        # Set the time uniform
+        time_uniform_location = gl.glGetUniformLocation(shader_program, "Time")
+        gl.glUniform1f(time_uniform_location, time)
+        
         vertices = Renderer._create_vertices()
         vbo = Renderer._create_vbo(vertices)
         Renderer._setup_vertex_attributes(shader_program)

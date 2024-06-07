@@ -2,6 +2,7 @@ import pygame
 from pygame import mixer
 from src.scenes.scene_factory import SceneFactory
 import random
+import time  # Import time for calculating elapsed time
 
 class Application:
     def __init__(self, screen, font_loader, text_renderer, input_handler, config):
@@ -15,6 +16,7 @@ class Application:
         self.is_rendering = True
         self.state_transition = False
         self.standard_sounds, self.enter_sounds = self._load_sounds()
+        self.start_time = time.time()  # Track the start time
 
     def run(self):
         self._initialize()
@@ -22,6 +24,7 @@ class Application:
         done = False
 
         while not done:
+            current_time = time.time() - self.start_time  # Calculate elapsed time
             for event in pygame.event.get():
                 done |= self.active_scene.handle_event(event)
                 if event.type == pygame.KEYDOWN:
@@ -30,7 +33,7 @@ class Application:
             self.active_scene.update()
             self.screen.clear()
             self.active_scene.render()
-            self.screen.display()
+            self.screen.display(current_time)  # Pass current time to display method
             clock.tick(60)
 
         pygame.quit()
