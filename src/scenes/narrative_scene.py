@@ -48,7 +48,7 @@ class NarrativeScene(MenuScene, TextScene):
         if selected_option == "[Exit]":
             if self.chapter.conversational_mode:
                 self.chapter.conversational_mode = False  # Exit conversational mode
-                self.chapter.conversation_history.clear()  # Clear conversation history
+                self.chapter.conversation_histories.clear()  # Clear conversation history
             self.app.set_scene('success_scene')
         else:
             self.chapter.process_selection(selected_option)

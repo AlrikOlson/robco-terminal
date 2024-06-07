@@ -3,12 +3,22 @@ from src.scenes.menu_scene import MenuScene
 
 class SuccessScene(MenuScene):
     def __init__(self, app):
-        super().__init__(app, ["Vault Overseer Log", "Research Log", "Business Terminal", "Log out", "Quit"])
+        super().__init__(app, [
+            "DATA LOGS",
+            "PERSONNEL RECORDS",
+            "SECURITY CONTROLS",
+            "POWER MANAGEMENT",
+            "LOG OUT",
+            "QUIT"
+        ])
 
     def enter(self):
         new_text = [
-            "Welcome to the Vault-Tec terminal.",
-            "System Status: All systems functional.",
+            "WELCOME TO ROBCO INDUSTRIES (TM) TERMLINK",
+            "VAULT CONTROL SYSTEM - VT-CLI 0.9",
+            "",
+            "COPYRIGHT 2075 ROBCO INDUSTRIES",
+            "-SERVER 6-",
             ""
         ]
         self.app.text_renderer.set_text(new_text)
@@ -17,14 +27,16 @@ class SuccessScene(MenuScene):
 
     def _process_menu_selection(self):
         selected_option = self.menu_options[self.selected_option]
-        if selected_option == "Vault Overseer Log":
-            self.app.set_scene('vault_overseer')
-        elif selected_option == "Research Log":
-            self.app.set_scene('research_log')
-        elif selected_option == "Business Terminal":
-            self.app.set_scene('business_terminal')
-        elif selected_option == "Log out":
+        if selected_option == "DATA LOGS":
+            self.app.set_scene('data_logs')
+        elif selected_option == "PERSONNEL RECORDS":
+            self.app.set_scene('personnel_records')
+        elif selected_option == "SECURITY CONTROLS":
+            self.app.set_scene('security_controls')
+        elif selected_option == "POWER MANAGEMENT":
+            self.app.set_scene('power_management')
+        elif selected_option == "LOG OUT":
             self.app.set_scene('login_scene')
-        elif selected_option == "Quit":
+        elif selected_option == "QUIT":
             pygame.event.post(pygame.event.Event(pygame.QUIT))
         return False

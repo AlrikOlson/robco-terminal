@@ -9,45 +9,37 @@ class MenuSupportMixin:
     def _render_menu(self, surface, text_renderer):
         self.text_renderer = text_renderer
         font = text_renderer.font
+
         if self.menu_options is None:
             print("menu_options is None")  # Debugging line
             return
+
+        terminal_width = surface.get_width()  # Get full width of the terminal
         y_offset = 50 + len(text_renderer.get_text_buffer()) * 30
-        padding = 10  # Increased padding for better visual
-        border_thickness = 2  # Border thickness
-        border_radius = 8   # Border radius
+        padding = 10  # Padding around text
+
+        left_margin = text_renderer.margin[0]  # Use the left margin from text_renderer
 
         for i, option in enumerate(self.menu_options):
             text = option
             option_surface = font.render(text, True, GREEN)
-            
-            # Get the dimensions of the text surface
-            text_width, text_height = option_surface.get_size()
-            
+
             # Create a new surface for the background rectangle
-            bg_width = text_width + padding * 2
-            bg_height = text_height + padding * 2
-            bg_surface = pygame.Surface((bg_width, bg_height), pygame.SRCALPHA)
-            
+            text_width, text_height = option_surface.get_size()
+            bg_surface = pygame.Surface((terminal_width, text_height + padding * 2), pygame.SRCALPHA)
+
             if i == self.selected_option:
-                # Fill the background surface with the text color (green)
                 bg_surface.fill(GREEN)
-                
-                # Render the text with transparent color
-                text_surface = font.render(text, True, (0, 0, 0, 0))
-                
-                # Blit the text surface onto the background surface
-                bg_surface.blit(text_surface, (padding, padding))
+                text_surface = font.render(text, True, (0, 0, 0))  # Render text in black for contrast
             else:
-                # Render the text with normal text color (green)
                 text_surface = font.render(text, True, GREEN)
-                
-                # Blit the text surface onto the background surface
-                bg_surface.blit(text_surface, (padding, padding))
-            
-            # Blit the background surface onto the screen
-            surface.blit(bg_surface, (50, y_offset))
-            y_offset += bg_height
+
+            text_x = left_margin + padding  # Ensure the text aligns with the left margin of the existing content
+            text_y = padding  # Vertical padding at the top
+
+            bg_surface.blit(text_surface, (text_x, text_y))
+            surface.blit(bg_surface, (0, y_offset))  # Ensure background spans full width
+            y_offset += bg_surface.get_height()
 
     def _draw_rounded_rect(self, surface, rect, color, thickness, radius):
         """

@@ -1,51 +1,60 @@
 nodes:
   start:
     content: |
-      *** ROBCO INDUSTRIES UNIFIED OPERATING SYSTEM ***
-      *** COPYRIGHT 2075-2077 ROBCO INDUSTRIES ***
-      **** SERVER 6 ****
-
-      Welcome to the RobCo Business Terminal. Please select an option:
+      BUSINESS TERMINAL
+      -----------------
     options:
-      - text: "Initiate Communication with a Representative"
+      - text: "INITIATE COMMUNICATION WITH A REPRESENTATIVE"
         target: representatives
+      - text: "RETURN TO MAIN MENU"
+        target: exit
 
   representatives:
     content: |
-      *** ROBCO INDUSTRIES UNIFIED OPERATING SYSTEM ***
-      *** COPYRIGHT 2075-2077 ROBCO INDUSTRIES ***
-      **** SERVER 6 ****
-
-      RobCo Industries - Representative Terminal
-      Select the desired representative:
+      REPRESENTATIVE TERMINAL
+      -----------------------
     options:
-      - text: "Initiate AI Support Agent Communication"
-        target: ai_support_agent
-      - text: "Initiate AI HR Representative Communication"
-        target: ai_hr_rep
+      - text: "INITIATE AI SUPPORT AGENT COMMUNICATION"
+        target: ai_support
+      - text: "INITIATE AI HR REPRESENTATIVE COMMUNICATION"
+        target: hr_support
+      - text: "BACK TO TERMINAL MENU"
+        target: start
 
   ai_support:
     content: |
-      *** ROBCO INDUSTRIES UNIFIED OPERATING SYSTEM ***
-      *** COPYRIGHT 2075-2077 ROBCO INDUSTRIES ***
-      **** SERVER 6 ****
-
-      RobCo Industries - AI Support Terminal
+      AI SUPPORT TERMINAL
+      -------------------
       Greetings, user. How may this AI Support Agent assist you today?
     options:
-      - text: "Engage in Dialogue with AI Support Agent"
+      - text: "ENGAGE IN DIALOGUE WITH AI SUPPORT AGENT"
         conversational: true
         target: ai_support_agent
+      - text: "BACK TO REPRESENTATIVE MENU"
+        target: representatives
 
   hr_support:
     content: |
-      *** ROBCO INDUSTRIES UNIFIED OPERATING SYSTEM ***
-      *** COPYRIGHT 2075-2077 ROBCO INDUSTRIES ***
-      **** SERVER 6 ****
-
-      RobCo Industries - AI HR Terminal
+      AI HR TERMINAL
+      --------------
       Greetings, employee. How may this AI HR Representative assist you today?
     options:
-      - text: "Engage in Dialogue with AI HR Representative"
+      - text: "ENGAGE IN DIALOGUE WITH AI HR REPRESENTATIVE"
         conversational: true
         target: ai_hr_rep
+      - text: "BACK TO REPRESENTATIVE MENU"
+        target: representatives
+
+  exit:
+    content: |
+      RETURNING TO MAIN MENU...
+    options:
+      - text: "MAIN MENU LOADED"
+        target: end
+
+  end:
+    content: |
+      [End of Log]
+    options:
+      - text: "[Back to Entry 1]"
+        target: start

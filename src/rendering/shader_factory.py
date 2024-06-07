@@ -63,7 +63,8 @@ class ShaderFactory:
         #define GRAYSCALE_LUMINANCE 1
         #define GRAYSCALE_LUMA 0
         #define TINT_AMBER vec3(1.0, 0.7, 0.0)
-        #define TINT_COLOR TINT_AMBER
+        #define TINT_GREEN vec3(0.0, 1.0, 0.0)
+        #define TINT_COLOR TINT_GREEN
         #define GRAIN_INTENSITY 0.02
 
         #define SCANLINE_FACTOR 0.3

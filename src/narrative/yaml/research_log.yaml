@@ -1,50 +1,83 @@
 nodes:
   start:
     content: |
-      [Dr. Morley's Research Log - Entry 1]
+      RESEARCH LOG - DR. MORLEY
+      -------------------------
+      > ENTRY 1
+      > ENTRY 2
+      > ENTRY 3
+      > ENTRY 4
+      > EXPERIMENT PROTOCOL
+      > RETURN TO MAIN MENU
+    options:
+      - text: "ENTRY 1"
+        target: entry_1
+      - text: "ENTRY 2"
+        target: entry_2
+      - text: "ENTRY 3"
+        target: entry_3
+      - text: "ENTRY 4"
+        target: entry_4
+      - text: "EXPERIMENT PROTOCOL"
+        target: experiment_protocol
+      - text: "RETURN TO MAIN MENU"
+        target: exit
+
+  entry_1:
+    content: |
+      RESEARCH LOG - ENTRY 1
+      ----------------------
       Experiment 57-A is yielding promising results. The mutated flora samples are adapting well to the new growth medium. The next phase of the experiment will involve exposing the samples to low levels of radiation to observe any further mutations.
     options:
-      - text: "[Entry 2]"
-        target: entry_2
-      - text: "[Experiment Protocol]"
-        target: experiment_protocol
+      - text: "BACK TO LOG"
+        target: start
+
   entry_2:
     content: |
-      [Dr. Morley's Research Log - Entry 2]
+      RESEARCH LOG - ENTRY 2
+      ----------------------
       Disaster struck today. An unexpected power surge caused a containment breach in Lab 3. The mutated plants have spread beyond our control. We've sealed off the affected areas, but the situation remains precarious.
     options:
-      - text: "[Entry 3]"
-        target: entry_3
-      - text: "[Back to Entry 1]"
+      - text: "BACK TO LOG"
         target: start
+
   entry_3:
     content: |
-      [Dr. Morley's Research Log - Entry 3]
+      RESEARCH LOG - ENTRY 3
+      ----------------------
       The vault's emergency protocols have been activated. We're attempting to destroy the plants with controlled burns, but progress is slow. Morale among the staff is deteriorating rapidly.
     options:
-      - text: "[Entry 4]"
-        target: entry_4
-      - text: "[Back to Entry 2]"
-        target: entry_2
+      - text: "BACK TO LOG"
+        target: start
+
   entry_4:
     content: |
-      [Dr. Morley's Research Log - Entry 4]
+      RESEARCH LOG - ENTRY 4
+      ----------------------
       This may be my final entry. The plants have overwhelmed our defenses. I've ordered a complete evacuation of all non-essential personnel. If anyone finds this log, remember: curiosity and carelessness have dire consequences.
     options:
-      - text: "[End of Log]"
-        target: end
-      - text: "[Back to Entry 3]"
-        target: entry_3
+      - text: "BACK TO LOG"
+        target: start
+
   experiment_protocol:
     content: |
-      [Experiment 57-A Protocol]
+      EXPERIMENT 57-A PROTOCOL
+      ------------------------
       - Subject: Mutated flora sample #23
       - Growth Medium: Enhanced nutrient solution with trace elements
       - Radiation Exposure: 0.5 rads/hour
       - Expected Outcome: Increased growth rate and mutation frequency
     options:
-      - text: "[Back to Entry 1]"
+      - text: "BACK TO LOG"
         target: start
+
+  exit:
+    content: |
+      RETURNING TO MAIN MENU...
+    options:
+      - text: "MAIN MENU LOADED"
+        target: end
+
   end:
     content: |
       [End of Log]
