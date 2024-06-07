@@ -31,16 +31,18 @@ jobs:
       run: |
         # Run your test suite here
         # For example: python -m unittest discover tests/
+
     - name: Install PyInstaller
       run: |
         pip install pyinstaller
 
     - name: Build Windows executable
       run: |
-        pyinstaller --onefile --name=robco-terminal --add-data "src/assets;assets" --add-data "src/handlers/ai_personalities;handlers/ai_personalities" --add-data "src/narrative/yaml;narrative/yaml" src/app/main.py
+        pyinstaller --name=robco-terminal --add-data "src/assets;assets" --add-data "src/handlers/ai_personalities;handlers/ai_personalities" --add-data "src/narrative/yaml;narrative/yaml" src/app/main.py
 
     - name: Install Windows SDK
       uses: microsoft/setup-msbuild@v1.1
+
     - name: Sign executable
       env:
         CERTIFICATE_BASE64: ${{ secrets.CERTIFICATE_BASE64 }}
@@ -48,13 +50,16 @@ jobs:
       run: |
         $bytes = [Convert]::FromBase64String($env:CERTIFICATE_BASE64)
         [IO.File]::WriteAllBytes("certificate.pfx", $bytes)
-        & 'C:\Program Files (x86)\Windows Kits\10\bin\10.0.22000.0\x64\signtool.exe' sign /f certificate.pfx /p $env:CERTIFICATE_PASSWORD /fd SHA256 /tr http://timestamp.digicert.com /td SHA256 ./dist/robco-terminal.exe
+        & 'C:\Program Files (x86)\Windows Kits\10\bin\10.0.22000.0\x64\signtool.exe' sign /f certificate.pfx /p $env:CERTIFICATE_PASSWORD /fd SHA256 /tr http://timestamp.digicert.com /td SHA256 ./dist/robco-terminal/robco-terminal.exe
 
     - name: Verify SHA256 Checksum
       id: compute_checksum
       run: |
-        $sha256 = Get-FileHash -Path ./dist/robco-terminal.exe -Algorithm SHA256
+        $sha256 = Get-FileHash -Path ./dist/robco-terminal/robco-terminal.exe -Algorithm SHA256
         echo "sha256=$($sha256.Hash)" >> $env:GITHUB_OUTPUT
+
+    - name: Zip release directory
+      run: Compress-Archive -Path ./dist/robco-terminal -DestinationPath ./robco-terminal.zip
 
     - name: Create Release
       id: create_release
@@ -82,6 +87,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./dist/robco-terminal.exe
-        asset_name: robco-terminal.exe
-        asset_content_type: application/vnd.microsoft.portable-executable
+        asset_path: ./robco-terminal.zip
+        asset_name: robco-terminal.zip
+        asset_content_type: application/zip
