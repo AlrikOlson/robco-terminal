@@ -32,14 +32,22 @@ jobs:
         # Run your test suite here
         # For example: python -m unittest discover tests/
 
-    - name: Install PyInstaller
+    - name: Download PyInstaller source
       run: |
-        pip install pyinstaller
-
-    - name: Build PyInstaller Bootloader
+        git clone --depth 1 https://github.com/pyinstaller/pyinstaller.git
+        cd pyinstaller
+        git submodule update --init --recursive
+        
+    - name: Build PyInstaller bootloader
       run: |
         cd bootloader
         python ./waf all
+        cd ../..
+
+    - name: Install rebuilt PyInstaller
+      run: |
+        cd pyinstaller
+        pip install .
         cd ..
 
     - name: Build Windows executable
@@ -51,7 +59,7 @@ jobs:
 
     - name: Sign executable
       env:
-        CERTIFICATE_BASE64: ${{ secrets.CERTIFICATE_BASE64 }}
+        CERTIFICATE_BASE64: ${{ secrets.CCERTIFICATE_BASE64 }}
         CERTIFICATE_PASSWORD: ${{ secrets.CERTIFICATE_PASSWORD }}
       run: |
         $bytes = [Convert]::FromBase64String($env:CERTIFICATE_BASE64)
