@@ -23,7 +23,7 @@ if sys.platform == "win32":
 
 setup(
     name="RobcoTerminal",
-    version="0.0.3",
+    version="0.0.1",
     description="ROBCO Termlink Emulator",
     options={"build_exe": build_exe_options},
     executables=[Executable("src/app/main.py", base=base)],
