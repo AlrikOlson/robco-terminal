@@ -1,6 +1,6 @@
 # ROBCO Termlink Emulator
 
-![ROBCO Termlink Emulator Screenshot](screenshot.gif)
+![ROBCO Termlink Emulator Screenshot](screenshot.mov)
 
 As a fan of the Fallout series, I wanted to try my hand at recreating the iconic in-game terminal interface. This project is a simple attempt to capture some of the retro-style look and feel of those terminals using Python, Pygame, and OpenGL. It includes basic CRT effects and experimental AI functionality powered by models from OpenAI, Anthropic, and Meta (via NVIDIA Build).
 
