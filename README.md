@@ -6,7 +6,7 @@ This emulator is still a work in progress, and I've received a lot of helpful gu
 
 ## Preview
 
-https://github.com/AlrikOlson/robco-terminal/assets/10505065/1d4ec275-dfc8-4dba-8dd8-ffc8c3bf4a43
+https://github.com/AlrikOlson/robco-terminal/assets/10505065/ddbc841e-08d8-4c6e-aa72-0eacd83fced9
 
 ## Features
 
