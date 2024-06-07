@@ -214,8 +214,8 @@ class ShaderFactory:
         vec3 refreshLines(vec3 color, vec2 uv) {
             float timeOver = fract(Time / 5.0) * 1.5 - 0.5;
             float refreshLineColorTint = timeOver - uv.y;
-            float scanLineWidth = 0.03; // Adjust the width of the scan line
-            float gradientFactor = 1.0; // Adjust the gradient intensity
+            float scanLineWidth = 0.2; // Adjust the width of the scan line
+            float gradientFactor = -0.05; // Adjust the gradient intensity
             
             if (uv.y > timeOver && uv.y - scanLineWidth < timeOver) {
                 float gradientIntensity = (timeOver - uv.y) / scanLineWidth;
