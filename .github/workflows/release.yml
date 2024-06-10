@@ -72,11 +72,17 @@ jobs:
           echo "sha256=$($sha256.Hash)" >> $env:GITHUB_OUTPUT
 
       - name: VirusTotal Scan
+        id: virustotal
         uses: crazy-max/ghaction-virustotal@v4
         with:
           vt_api_key: ${{ secrets.VT_API_KEY }}
           files: |
             ./dist/robco-terminal.exe
+
+      - name: Extract VirusTotal Scan Link
+        id: extract_vt_link
+        run: |
+          echo "VT_LINK=${{ steps.virustotal.outputs.analysis -split '=' | select -last 1 }}" >> $env:GITHUB_ENV
 
       - name: Create Release
         id: create_release
@@ -94,7 +100,7 @@ jobs:
             - **Build**: Packaged with PyInstaller.
             - **Signing**: Signed using a self-signed certificate. Expect warnings, but you can still run it.
 
-            **VirusTotal Scan**: [View Results](${{ split(steps.virustotal.outputs.analysis, '=')[1] }})
+            **VirusTotal Scan**: [View Results](${{ env.VT_LINK }})
 
             ## Commits
 
