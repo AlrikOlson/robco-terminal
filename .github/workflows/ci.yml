@@ -11,55 +11,70 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.x'
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+          cache: "pip"
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
-    - name: Download PyInstaller source
-      run: |
-        git clone --depth 1 https://github.com/pyinstaller/pyinstaller.git
-        cd pyinstaller
-        git submodule update --init --recursive
+      - name: Download PyInstaller source
+        run: |
+          git clone --depth 1 https://github.com/pyinstaller/pyinstaller.git
+          cd pyinstaller
+          git submodule update --init --recursive
 
-    - name: Build PyInstaller bootloader
-      run: |
-        cd pyinstaller/bootloader
-        python ./waf all
-        cd ../..
+      - name: Build PyInstaller bootloader
+        run: |
+          cd pyinstaller/bootloader
+          python ./waf --gcc all
+          cd ../..
 
-    - name: Install rebuilt PyInstaller
-      run: |
-        cd pyinstaller
-        pip install .
-        cd ..
+      - name: Install rebuilt PyInstaller
+        run: |
+          cd pyinstaller
+          pip install .
+          cd ..
 
-    - name: Build Windows executable
-      run: |
-        pyinstaller --name=robco-terminal --add-data "src/assets;assets" --add-data "src/handlers/ai_personalities;handlers/ai_personalities" --add-data "src/narrative/yaml;narrative/yaml" src/app/main.py
+      - name: Build Windows executable
+        run: |
+          pyinstaller --onefile --name=robco-terminal --add-data "src/assets;assets" --add-data "src/handlers/ai_personalities;handlers/ai_personalities" --add-data "src/narrative/yaml;narrative/yaml" src/app/main.py
 
-    - name: Verify SHA256 Checksum
-      id: compute_checksum
-      run: |
-        $sha256 = Get-FileHash -Path ./dist/robco-terminal/robco-terminal.exe -Algorithm SHA256
-        echo "sha256=$($sha256.Hash)" >> $env:GITHUB_OUTPUT
-    - name: VirusTotal Scan
-      uses: crazy-max/ghaction-virustotal@v4
-      with:
-        vt_api_key: ${{ secrets.VT_API_KEY }}
-        files: |
-          ./dist/robco-terminal/robco-terminal.exe
-    - name: Upload artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: robco-terminal
-        path: ./dist/robco-terminal/robco-terminal.exe
+      - name: Install Windows SDK
+        uses: microsoft/setup-msbuild@v1.1
+
+      - name: Sign executable
+        env:
+          CERTIFICATE_BASE64: ${{ secrets.CERTIFICATE_BASE64 }}
+          CERTIFICATE_PASSWORD: ${{ secrets.CERTIFICATE_PASSWORD }}
+        run: |
+          $bytes = [Convert]::FromBase64String($env:CERTIFICATE_BASE64)
+          [IO.File]::WriteAllBytes("certificate.pfx", $bytes)
+          & 'C:\Program Files (x86)\Windows Kits\10\bin\10.0.22000.0\x64\signtool.exe' sign /f certificate.pfx /p $env:CERTIFICATE_PASSWORD /fd SHA256 /tr http://timestamp.digicert.com /td SHA256 ./dist/robco-terminal.exe
+
+      - name: Verify SHA256 Checksum
+        id: compute_checksum
+        run: |
+          $sha256 = Get-FileHash -Path ./dist/robco-terminal.exe -Algorithm SHA256
+          echo "sha256=$($sha256.Hash)" >> $env:GITHUB_OUTPUT
+
+      - name: VirusTotal Scan
+        uses: crazy-max/ghaction-virustotal@v4
+        with:
+          vt_api_key: ${{ secrets.VT_API_KEY }}
+          files: |
+            ./dist/robco-terminal.exe
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: robco-terminal
+          path: ./dist/robco-terminal.exe
