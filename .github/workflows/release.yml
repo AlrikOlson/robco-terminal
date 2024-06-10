@@ -82,7 +82,9 @@ jobs:
       - name: Extract VirusTotal Scan Link
         id: extract_vt_link
         run: |
-          echo "VT_LINK=${{ steps.virustotal.outputs.analysis -split '=' | select -last 1 }}" >> $env:GITHUB_ENV
+          $vtLink = "${{ steps.virustotal.outputs.analysis }}"
+          $vtLink = $vtLink.Split('=')[-1]
+          echo "VT_LINK=$vtLink" >> $env:GITHUB_ENV
 
       - name: Create Release
         id: create_release
