@@ -71,6 +71,13 @@ jobs:
           $sha256 = Get-FileHash -Path ./dist/robco-terminal.exe -Algorithm SHA256
           echo "sha256=$($sha256.Hash)" >> $env:GITHUB_OUTPUT
 
+      - name: VirusTotal Scan
+        uses: crazy-max/ghaction-virustotal@v4
+        with:
+          vt_api_key: ${{ secrets.VT_API_KEY }}
+          files: |
+            ./dist/robco-terminal.exe
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -86,16 +93,13 @@ jobs:
 
             - **Build**: Packaged with PyInstaller.
             - **Signing**: Signed using a self-signed certificate. Expect warnings, but you can still run it.
-            - **Verification**: Check the SHA256 hash below to verify integrity.
 
-            **SHA256 Checksum**: `${{ steps.compute_checksum.outputs.sha256 }}`
-      - name: VirusTotal Scan
-        uses: crazy-max/ghaction-virustotal@v4
-        with:
-          update_release_body: true
-          vt_api_key: ${{ secrets.VT_API_KEY }}
-          files: |
-            ./dist/robco-terminal.exe
+            **VirusTotal Scan**: [View Results](${{ steps.virustotal.outputs.permalink }})
+
+            ## Commits
+
+            ${{ github.event.head_commit.message }}
+            ${{ join(github.event.commits.*.message, '\n') }}
 
       - name: Upload Release Asset
         id: upload-release-asset
