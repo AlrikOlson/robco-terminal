@@ -52,14 +52,19 @@ jobs:
       run: |
         $sha256 = Get-FileHash -Path ./dist/robco-terminal/robco-terminal.exe -Algorithm SHA256
         echo "sha256=$($sha256.Hash)" >> $env:GITHUB_OUTPUT
+
+    - name: Zip release directory
+      run: Compress-Archive -Path ./dist/robco-terminal -DestinationPath ./robco-terminal.zip
+
     - name: VirusTotal Scan
       uses: crazy-max/ghaction-virustotal@v4
       with:
         vt_api_key: ${{ secrets.VT_API_KEY }}
         files: |
           ./dist/robco-terminal/robco-terminal.exe
+
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
         name: robco-terminal
-        path: ./dist/robco-terminal/robco-terminal.exe
+        path: ./robco-terminal.zip
