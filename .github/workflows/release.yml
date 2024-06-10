@@ -83,7 +83,7 @@ jobs:
         id: extract_vt_link
         run: |
           $vtLink = "${{ steps.virustotal.outputs.analysis }}"
-          $vtLink = $vtLink.Split('=')[-1]
+          $vtLink = $vtLink -split '=', 2 | Select-Object -Last 1
           echo "VT_LINK=$vtLink" >> $env:GITHUB_ENV
 
       - name: Create Release
