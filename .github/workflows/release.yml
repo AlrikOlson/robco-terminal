@@ -94,7 +94,7 @@ jobs:
             - **Build**: Packaged with PyInstaller.
             - **Signing**: Signed using a self-signed certificate. Expect warnings, but you can still run it.
 
-            **VirusTotal Scan**: [View Results](${{ steps.virustotal.outputs.permalink }})
+            **VirusTotal Scan**: [View Results](${{ split(steps.virustotal.outputs.analysis, '=')[1] }})
 
             ## Commits
 
