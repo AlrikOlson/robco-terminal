@@ -34,7 +34,7 @@ jobs:
     - name: Build PyInstaller bootloader
       run: |
         cd pyinstaller/bootloader
-        python ./waf all
+        python ./waf --gcc all
         cd ../..
 
     - name: Install rebuilt PyInstaller
