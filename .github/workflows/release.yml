@@ -59,7 +59,7 @@ jobs:
 
     - name: Sign executable
       env:
-        CERTIFICATE_BASE64: ${{ secrets.CCERTIFICATE_BASE64 }}
+        CERTIFICATE_BASE64: ${{ secrets.CERTIFICATE_BASE64 }}
         CERTIFICATE_PASSWORD: ${{ secrets.CERTIFICATE_PASSWORD }}
       run: |
         $bytes = [Convert]::FromBase64String($env:CERTIFICATE_BASE64)
