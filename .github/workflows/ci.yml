@@ -44,7 +44,7 @@ jobs:
 
       - name: Build Windows executable
         run: |
-          pyinstaller --onefile --name=robco-terminal --add-data "src/assets;assets" --add-data "src/handlers/ai_personalities;handlers/ai_personalities" --add-data "src/narrative/yaml;narrative/yaml" src/app/main.py
+          pyinstaller --noconsole --onefile --windowed --name=robco-terminal --add-data "src/assets;assets" --add-data "src/handlers/ai_personalities;handlers/ai_personalities" --add-data "src/narrative/yaml;narrative/yaml" src/app/main.py
 
       - name: Install Windows SDK
         uses: microsoft/setup-msbuild@v1.1

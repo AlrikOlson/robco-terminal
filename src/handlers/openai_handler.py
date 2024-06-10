@@ -17,8 +17,8 @@ from src.handlers.ai_tools.tools_clients import (
 from src.handlers.ai_tools.tools_provider import LLMProviderHandler
 
 logging.basicConfig(
-    filename="llm_interactions.log",
-    level=logging.INFO,
+    filename="robco-terminal-errors.log",
+    level=logging.ERROR,
     format="%(asctime)s - %(message)s",
 )
 
