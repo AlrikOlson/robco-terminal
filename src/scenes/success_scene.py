@@ -1,5 +1,7 @@
 import pygame
+
 from src.scenes.menu_scene import MenuScene
+
 
 class SuccessScene(MenuScene):
     def __init__(self, app):
@@ -8,6 +10,7 @@ class SuccessScene(MenuScene):
             "PERSONNEL RECORDS",
             "SECURITY CONTROLS",
             "POWER MANAGEMENT",
+            "VAULT MAP",
             "LOG OUT",
             "QUIT"
         ])
@@ -35,6 +38,8 @@ class SuccessScene(MenuScene):
             self.app.set_scene('security_controls')
         elif selected_option == "POWER MANAGEMENT":
             self.app.set_scene('power_management')
+        elif selected_option == "VAULT MAP":
+            self.app.set_scene('vault_scene')
         elif selected_option == "LOG OUT":
             self.app.set_scene('login_scene')
         elif selected_option == "QUIT":

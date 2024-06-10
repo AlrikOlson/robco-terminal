@@ -1,6 +1,7 @@
 from src.assets.file_loader import FileLoader
 from src.scenes.bootup_scene import BootupScene
 from src.scenes.login_scene import LoginScene
+from src.scenes.vault_scene import VaultScene
 from src.scenes.success_scene import SuccessScene
 from src.scenes.narrative_scene import NarrativeScene
 from src.scenes.data_logs_scene import DataLogsScene
@@ -30,6 +31,7 @@ class SceneFactory:
             'vault149_medical_terminal': NarrativeScene(app, SceneFactory._load_chapter('vault149/medical_terminal.yaml')),
             'vault149_overseer_terminal': NarrativeScene(app, SceneFactory._load_chapter('vault149/overseer_terminal.yaml')),
             'vault149_security_terminal': NarrativeScene(app, SceneFactory._load_chapter('vault149/security_terminal.yaml')),
+            'vault_scene': VaultScene(app),
         }
 
     @staticmethod
