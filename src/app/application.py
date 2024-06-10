@@ -1,3 +1,5 @@
+from pysndfx import AudioEffectsChain
+import tempfile
 import pygame
 from pygame import mixer
 from src.scenes.scene_factory import SceneFactory
