@@ -40,7 +40,7 @@ jobs:
         
     - name: Build PyInstaller bootloader
       run: |
-        cd bootloader
+        cd pyinstaller/bootloader
         python ./waf all
         cd ../..
 
