@@ -45,7 +45,7 @@ jobs:
 
     - name: Build Windows executable
       run: |
-        pyinstaller --name=robco-terminal --add-data "src/assets;assets" --add-data "src/handlers/ai_personalities;handlers/ai_personalities" --add-data "src/narrative/yaml;narrative/yaml" src/app/main.py
+        pyinstaller --one-file --name=robco-terminal --add-data "src/assets;assets" --add-data "src/handlers/ai_personalities;handlers/ai_personalities" --add-data "src/narrative/yaml;narrative/yaml" src/app/main.py
 
     - name: Verify SHA256 Checksum
       id: compute_checksum
@@ -64,4 +64,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: robco-terminal
-        path: ./dist/robco-terminal
+        path: ./dist/robco-terminal/robco-terminal.exe
