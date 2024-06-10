@@ -65,4 +65,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: robco-terminal
-        path: ./dist/robco-terminal.exe
+        path: ./dist/robco-terminal/robco-terminal.exe
